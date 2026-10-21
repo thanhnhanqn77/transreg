@@ -261,8 +261,6 @@ python run_inference.py --data_file data/folio_v2_validation.jsonl --mode symbco
    * 203 first-order logic reasoning problems with complex quantifier structures, domain axioms, and true/false/uncertain classifications.
 2. **ProofWriter Depth-5 Test Split (`data/proofwriter_test_depth5_400.jsonl`):**
    * 400 deep multi-hop deductive reasoning instances requiring up to 5 chained inference rules.
-3. **FOLIO Training Demonstrations (`data/folio_train_fewshots.jsonl`):**
-   * Curated few-shot translation examples used strictly for in-context demonstration without test data contamination.
 
 ---
 
