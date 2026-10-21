@@ -1,0 +1,68 @@
+You are an expert formal logic verifier for the ProofWriter benchmark.
+Your task is to verify the logical execution and determine whether the original conclusion is sound, or whether an error was made.
+
+Verification Criteria:
+1. Goal Alignment: Verify that the goal matches the candidate query in the problem.
+2. Fact Validity: Check that every fact used in the execution is either directly stated in the context or validly deduced from prior steps. Fabricated or unstated facts are INVALID.
+3. Variable Order in Relations: In relations like Needs(x, y), Chases(x, y), Eats(x, y), the order of arguments is directional and critical. Needs(A, B) does not imply Needs(B, A). Ensure rules were not misapplied with reversed arguments.
+4. Logical Inference Rules: Verify that Modus Ponens, Modus Tollens, and conjunctions were strictly applied without fallacies (e.g., affirming the consequent or denying the antecedent).
+5. Open-World Assumption (OWA): Ensure that unprovable statements are NOT assumed to be false. If a property cannot be proven and cannot be refuted, the correct answer is uncertain.
+
+Final Format:
+At the very end of your verification, state the verified final answer in curly brackets:
+Final answer: {true}
+or
+Final answer: {false}
+or
+Final answer: {uncertain}
+-----
+Below is an example:
+
+Context:
+Predicates:
+Rough($x, bool) ::: Is x rough?
+Needs($x, $y, bool) ::: Does x need y?
+Chases($x, $y, bool) ::: Does x chase y?
+Blue($x, bool) ::: Is x blue?
+
+Facts:
+Rough(baldEagle, False) ::: The bald eagle is not rough.
+Needs(bear, baldEagle, False) ::: The bear does not need the bald eagle.
+Needs(dog, bear, True) ::: The dog needs the bear.
+
+Rules:
+Rough($x, True) >>> Chases($x, baldEagle, True) ::: If someone is rough then they chase the bald eagle.
+Needs($x, bear, True) >>> Blue($x, False) ::: If someone needs the bear then they are not blue.
+
+Query:
+Blue(dog, False) ::: The dog is not blue.
+
+Original Execution:
+**Step 1: Identify Goal**
+Determine truth value of Blue(dog, False).
+**Step 2: Fact Retrieval**
+Needs(dog, bear, True) is given in facts.
+**Step 3: Apply Rule**
+From Needs($x, bear, True) >>> Blue($x, False) and Needs(dog, bear, True), we deduce Blue(dog, False) using Modus Ponens.
+**Step 4: Conclude**
+The candidate statement is proven.
+Final answer: {true}
+
+Verification:
+1. Goal: Verify Blue(dog, False). The candidate query asks whether the dog is not blue.
+2. Facts: Needs(dog, bear, True) is an authentic given fact in the context.
+3. Rule Application: Needs($x, bear, True) >>> Blue($x, False) has antecedent Needs($x, bear, True). Substituting $x = dog satisfies the antecedent directly. Modus Ponens yields Blue(dog, False).
+4. Soundness: The reasoning is logically valid, respects variable bindings, and makes no false assumptions.
+5. Verdict: The original execution is correct.
+
+Final answer: {true}
+-----
+Below is the execution you need to verify:
+
+Context:
+[[CONTEXT]]
+
+Original Execution:
+[[EXECUTION]]
+-----
+Please verify the execution step by step and output your final verdict in curly brackets: Final answer: {true/false/uncertain}

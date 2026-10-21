@@ -1,0 +1,288 @@
+[
+  {
+    "source": {
+      "dataset_index": 0,
+      "story_id": 406,
+      "example_id": 1131,
+      "premise_index": 4
+    },
+    "input": {
+      "premises": [
+        "All people who regularly drink coffee are dependent on caffeine.",
+        "People either regularly drink coffee or joke about being addicted to caffeine.",
+        "No one who jokes about being addicted to caffeine is unaware that caffeine is a drug.",
+        "Rina is either a student and unaware that caffeine is a drug, or neither a student nor unaware that caffeine is a drug.",
+        "If Rina is not a person dependent on caffeine and a student, then Rina is either a person dependent on caffeine and a student, or neither a person dependent on caffeine nor a student. "
+      ],
+      "question": "Rina is a person who jokes about being addicted to caffeine or unaware that caffeine is a drug."
+    },
+    "output": {
+      "global_analysis": {
+        "context": [
+          "Coffee drinking, dependence, joking, lack of awareness and student status must stay distinct. Rina denotes the same person throughout. Generic people denotes the domain; either ... or ... is exclusive (xor); plain or is inclusive.",
+          "The question is a query, not an additional premise."
+        ],
+        "shared_meanings": [
+          {
+            "name": "DependentOnCaffeine",
+            "meaning": "{0} is dependent on caffeine"
+          },
+          {
+            "name": "Student",
+            "meaning": "{0} is a student"
+          }
+        ],
+        "entities": [
+          {
+            "canonical_name": "Rina",
+            "evidence": "If Rina is not a person dependent on caffeine and a student, then Rina is either a person dependent on caffeine and a student, or neither a person dependent on caffeine nor a student. "
+          }
+        ],
+        "related_chunks": [],
+        "predicate_alignments": [],
+        "shared_events": [],
+        "argument_roles": {
+          "DependentOnCaffeine": [
+            "person"
+          ],
+          "Student": [
+            "person"
+          ]
+        },
+        "coreference": [],
+        "must_remain_distinct": [
+          "joking about addiction is not being dependent",
+          "unaware is not an alias of joking",
+          "student is distinct from dependent"
+        ],
+        "uncertainties": [
+          "Resolve any uncertain relation using the source sentence; do not add facts from this analysis."
+        ]
+      }
+    }
+  },
+  {
+    "source": {
+      "dataset_index": 5,
+      "story_id": 8,
+      "example_id": 21,
+      "premise_index": 3
+    },
+    "input": {
+      "premises": [
+        "Miroslav Venhoda was a Czech choral conductor who specialized in the performance of Renaissance and Baroque music.",
+        "Any choral conductor is a musician.",
+        "Some musicians love music.",
+        "Miroslav Venhoda published a book in 1946 called Method of Studying Gregorian Chant."
+      ],
+      "question": "A Czech person wrote a book in 1946."
+    },
+    "output": {
+      "global_analysis": {
+        "context": [
+          "The same Miroslav Venhoda is described as Czech and as the personal author of a named book. Under the narrow FOLIO personal-work convention, his published book and the query about a Czech author writing a book share Book/Author/PublishedIn meanings. The query remains existential, not a fact about a substituted named witness.",
+          "The question is a query, not an additional premise."
+        ],
+        "shared_meanings": [
+          {
+            "name": "Book",
+            "meaning": "{0} is a book"
+          },
+          {
+            "name": "Author",
+            "meaning": "{0} authored {1}"
+          },
+          {
+            "name": "PublishedIn",
+            "meaning": "{0} was published in {1}"
+          }
+        ],
+        "entities": [
+          {
+            "canonical_name": "MethodOfStudyingGregorianChant",
+            "evidence": "Miroslav Venhoda published a book in 1946 called Method of Studying Gregorian Chant."
+          },
+          {
+            "canonical_name": "MiroslavVenhoda",
+            "evidence": "Miroslav Venhoda published a book in 1946 called Method of Studying Gregorian Chant."
+          }
+        ],
+        "related_chunks": [],
+        "predicate_alignments": [],
+        "shared_events": [],
+        "argument_roles": {
+          "Book": [
+            "work"
+          ],
+          "Author": [
+            "author",
+            "work"
+          ],
+          "PublishedIn": [
+            "work",
+            "year"
+          ]
+        },
+        "coreference": [],
+        "must_remain_distinct": [
+          "musician vs loves music",
+          "Renaissance vs Baroque",
+          "personal authored publication vs a publishing company"
+        ],
+        "uncertainties": [
+          "Resolve any uncertain relation using the source sentence; do not add facts from this analysis."
+        ]
+      }
+    }
+  },
+  {
+    "source": {
+      "dataset_index": 8,
+      "story_id": 463,
+      "example_id": 1342,
+      "premise_index": 5
+    },
+    "input": {
+      "premises": [
+        "All eels are fish. ",
+        "No fish are plants. ",
+        "A thing is either a plant or animal.",
+        "Nothing that breathes is paper. ",
+        "All animals breathe.",
+        "If a sea eel is either an eel or a plant, then a sea eel is an eel or an animal."
+      ],
+      "question": "Sea eel is a paper."
+    },
+    "output": {
+      "global_analysis": {
+        "context": [
+          "The conditional mentions a designated sea eel that recurs as Sea eel in the question. Keep that individual stable; do not switch from a quantified SeaEel category to a disconnected named constant. Do not infer Eel membership from its name. The general plant/animal alternative uses XOR, while the consequent eel-or-animal uses OR.",
+          "The question is a query, not an additional premise."
+        ],
+        "shared_meanings": [
+          {
+            "name": "Eel",
+            "meaning": "{0} is an eel"
+          },
+          {
+            "name": "Plant",
+            "meaning": "{0} is a plant"
+          },
+          {
+            "name": "Animal",
+            "meaning": "{0} is an animal"
+          }
+        ],
+        "entities": [
+          {
+            "canonical_name": "SeaEel",
+            "evidence": "If a sea eel is either an eel or a plant, then a sea eel is an eel or an animal."
+          }
+        ],
+        "related_chunks": [],
+        "predicate_alignments": [],
+        "shared_events": [],
+        "argument_roles": {
+          "Eel": [
+            "thing"
+          ],
+          "Plant": [
+            "thing"
+          ],
+          "Animal": [
+            "thing"
+          ]
+        },
+        "coreference": [],
+        "must_remain_distinct": [
+          "the individual SeaEel vs the category Eel",
+          "Plant vs Animal",
+          "Breathes vs Paper"
+        ],
+        "uncertainties": [
+          "Resolve any uncertain relation using the source sentence; do not add facts from this analysis."
+        ]
+      }
+    }
+  },
+  {
+    "source": {
+      "dataset_index": 10,
+      "story_id": 133,
+      "example_id": 393,
+      "premise_index": 2
+    },
+    "input": {
+      "premises": [
+        "The Blake McFall Company Building is a commercial warehouse listed on the National Register of Historic Places.",
+        "The Blake McFall Company Building was added to the National Register of Historic Places in 1990.",
+        "The Emmet Building is a five-story building in Portland, Oregon.",
+        "The Emmet Building was built in 1915.",
+        "The Emmet Building is another name for the Blake McFall Company Building.",
+        "John works at the Emmet Building."
+      ],
+      "question": "A five-story building is built in 1915."
+    },
+    "output": {
+      "global_analysis": {
+        "context": [
+          "Emmet Building is explicitly another name for Blake McFall Company Building; preserve that identity as equality. Separate five storeys, Portland/Oregon location, construction in 1915 and registry entry in 1990. Keep all clauses, not just the one needed by the query.",
+          "The question is a query, not an additional premise."
+        ],
+        "shared_meanings": [
+          {
+            "name": "Building",
+            "meaning": "{0} is a building"
+          },
+          {
+            "name": "HasStoreys",
+            "meaning": "{0} has {1} storeys"
+          },
+          {
+            "name": "LocatedIn",
+            "meaning": "{0} is located in {1}"
+          }
+        ],
+        "entities": [
+          {
+            "canonical_name": "EmmetBuilding",
+            "evidence": "The Emmet Building is a five-story building in Portland, Oregon."
+          },
+          {
+            "canonical_name": "Portland",
+            "evidence": "The Emmet Building is a five-story building in Portland, Oregon."
+          },
+          {
+            "canonical_name": "Oregon",
+            "evidence": "The Emmet Building is a five-story building in Portland, Oregon."
+          }
+        ],
+        "related_chunks": [],
+        "predicate_alignments": [],
+        "shared_events": [],
+        "argument_roles": {
+          "Building": [
+            "building"
+          ],
+          "HasStoreys": [
+            "building",
+            "count"
+          ],
+          "LocatedIn": [
+            "located_entity",
+            "location"
+          ]
+        },
+        "coreference": [],
+        "must_remain_distinct": [
+          "construction date vs registry entry date",
+          "Portland vs Oregon",
+          "the building vs the register"
+        ],
+        "uncertainties": [
+          "Resolve any uncertain relation using the source sentence; do not add facts from this analysis."
+        ]
+      }
+    }
+  }
+]

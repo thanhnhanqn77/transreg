@@ -1,0 +1,90 @@
+CANONICAL FOLIO INTERPRETATION POLICY (shared by translation and verification)
+Judge the most natural, dataset-consistent reading under these explicit rules.
+Ambiguity alone is NOT a semantic error. Do not reject a candidate solely because
+an alternative English reading is theoretically possible. Require a concrete
+mismatch with the source under this policy. Do not use gold answers or invent facts.
+
+- Do not automatically introduce a type predicate for generic domain nouns such as
+  "people", "customers", "persons", etc. if the sentence is naturally quantified
+  over that discourse class (e.g. "Customers either subscribe to AMC service or HBO service" ->
+  forall x (SubscribedToAMC(x) xor SubscribedToHBO(x))). Keep substantive restrictions
+  (Doctor, Student, Bird, etc.). In generic statements the quantification domain is that
+  discourse class; the solver's sort label Entity does not broaden that domain or demand
+  an extra Person or Customer guard. A back-translation's "every entity" denotes this same
+  discourse domain. Rejecting solely for missing Person/Customer contradicts this explicit policy.
+- Prefer canonical reusable semantic predicates over surface-form predicates.
+- When a meaning can be compositionally represented using existing predicates,
+  reuse/decompose into those predicates instead of introducing a new monolithic predicate.
+- Preserve the representation style used consistently across the current problem and the few-shot examples.
+- Do not add facts that are not stated or logically licensed.
+- Evaluate semantic correctness under the same FOLIO representation conventions
+  used by the translator and few-shot demonstrations. Do not reject a candidate translation
+  merely because another logically possible formalization exists (such as demanding a redundant
+  x != y distinctness guard when none was asserted, or rejecting an established relational phrasing).
+- Plain "or" uses inclusive disjunction canonically: (expr1 or expr2).
+  "either ... or ..." uses exclusive disjunction canonically: (expr1 xor expr2).
+  In FOLIO dataset structure and SymbCoT translation conventions, natural language
+  "either A or B" denotes logical exclusive disjunction (expr1 ⊕ expr2 / xor), whereas
+  plain "A or B" denotes inclusive disjunction (expr1 ∨ expr2 / or).
+  Thus "People either regularly drink coffee or joke about caffeine" translates
+  canonically to forall x (RegularlyDrinkCoffee(x) xor JokesAboutCaffeine(x)).
+- Every/all/each A is B: forall x (A(x) -> B(x)). Explicit some/there exists:
+  exists x (A(x) and B(x)). The article a/an ALONE does not select exists:
+  a generic class rule ("A patient with a fever needs rest") is universal;
+  an episodic introduction can be existential; a recurring definite/anaphoric
+  subject preserves its designated referent. Decide from the whole source,
+  including the query. Never generalize a designated "his adviser" into all
+  advisers or identify a category with a newly invented individual constant.
+  No A is B: forall x (A(x) -> not B(x)). Statements with relative
+  clauses like "Xs who P do Q", "People who P do Q", or "Customers who P and will not Q"
+  express universal conditional rules: forall x (P(x) -> Q(x)). Do NOT reject this
+  canonical universal implication or demand a universal conjunction forall x (P(x) and Q(x)).
+  Preserve explicit existential assertions, universal restrictions and quantifier scope;
+  do not instantiate unspecified individuals as named constants or add existential import.
+- Grammatical past/present tense alone is neutral in timeless FOLIO properties.
+  Preserve explicitly asserted temporal relations or dates; tense neutrality does
+  not license removing these facts.
+- If A then B is A -> B; A only if B is A -> B. Do not reverse the implication,
+  strengthen it to equivalence, omit its condition, or add unsupported conditions.
+- Preserve negation and coordination scope. "Neither A nor B" means not A and
+  not B. "Not a P and a Q" negates the coordinated noun phrase; "not P and is Q"
+  negates only P. Preserve lexical unaware as a property; do not silently equate
+  it with a different predicate or add an unasserted relationship.
+- Preserve exact cardinality, at-least/at-most bounds, distinct witnesses and
+  equality/inequality; no unique-name or closed-world assumptions by default.
+- Reject actual wrong predicates, entities, argument roles/order, quantifiers,
+  implication direction, missing negation or clauses, and unsupported additions.
+  For example "Every doctor is a researcher" is NOT equivalent to
+  forall x (Researcher(x) -> Doctor(x)). This is a concrete reversed implication.
+
+FOLIO CONTEXT AND REGISTRY ALIGNMENT (apply to premises and question alike)
+- For a personal biographical statement "NAME published a book in YEAR called
+  TITLE", use the benchmark personal-work convention: Book(TITLE),
+  Author(NAME,TITLE), PublishedIn(TITLE,YEAR). A query that someone "wrote a book
+  in YEAR" uses these SAME relations with existential variables, plus any stated
+  restriction such as Czech(person). Keep the year and named title. This is a
+  narrow FOLIO personal-work convention, NOT a universal publisher=author rule.
+  Do not apply it to publishing companies, editors, translators, or publication
+  explicitly attributed to someone else's authorship. New unrelated meanings
+  still need distinct predicates. A generic query must not be instantiated as
+  the known named author just to make a proof succeed.
+- Determine whether a singular noun phrase is a designated discourse individual
+  or a quantified category using the whole problem, and preserve that choice
+  through the question. In FOLIO's categorical puzzle about "a sea eel" followed
+  by "Sea eel is ...", the recurring sea eel is the SAME designated individual:
+  use SeaEel as a constant in the conditional and question. Do not translate the
+  premise as a rule guarded by SeaEel(x), then ask Paper(SeaEel) about an unrelated
+  constant. Do not assert Eel(SeaEel) merely because its name contains "eel".
+  Explicit all/some sea eels remain quantified; this is not a rule making every
+  common noun a constant. Surface-name identity is not an extra taxonomy fact.
+- An asserted naming identity ("X is another name for Y") is equality between
+  stable constants, not a unary property or an unconnected new predicate.
+  Keep construction dates distinct from register-entry dates and preserve
+  location, nationality, roles, named works, numeric counts and other clauses.
+- Negated coordinated noun phrases have joint scope: "not a person dependent
+  on caffeine and a student" is not (Dependent(x) and Student(x)), whereas
+  "not dependent and is a student" is (not Dependent(x)) and Student(x).
+- FOL identifiers cannot contain hyphens, spaces or apostrophes. Use L2021 for
+  the named monitor "L-2021"; retain the original surface spelling in its meaning.
+  L-2021 inside FOL is subtraction, not an entity name. Reuse canonical spelling
+  across every premise and question. Do not change true numeric expressions.

@@ -1,0 +1,19 @@
+Analyze relations across ALL premises and the question before any translation.
+Return ONLY JSON {"global_analysis":{"shared_meanings":[],"related_chunks":[],"entities":[],"predicate_alignments":[],"shared_events":[],"argument_roles":[],"coreference":[],"context":[],"must_remain_distinct":[],"uncertainties":[]}}.
+Record textual evidence and uncertainty for suggested alignments. Do not generate FOL, declarations, a registry, or an answer. This analysis is fallible guidance, never verified truth. Do not import facts or resolve uncertainty just to make a proof work.
+In particular, identify equivalent personal-work wording (published/authored/wrote
+under the shared FOLIO policy), recurring singular discourse individuals versus
+categories, explicit naming equalities, and coordinated negation. Record exact
+source evidence for each proposed alignment, keeping publishers/companies and
+authors distinct outside the narrow personal-work convention. Do not derive the
+answer or promote a common-noun name into an unasserted category membership.
+
+MANDATORY SCOPE AND DOMAIN CHECK BEFORE RETURNING JSON:
+For "not a person P and a Q", first group the coordinated noun phrase as
+(P and Q), then negate that ENTIRE group: not (P and Q). Do not emit or accept
+(not P) and Q for this wording. That difference is a concrete policy violation,
+not hypothetical ambiguity. Apply this check inside implication antecedents too.
+For "a person who P", "a person P", and "People P", person is the discourse
+domain wording under this policy. Do not add Person as an independent conjunct
+or guard in this same human-domain problem, especially only in its question.
+The global analysis and accepted registry cannot override these scope rules.

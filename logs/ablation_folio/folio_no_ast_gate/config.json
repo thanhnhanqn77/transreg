@@ -1,0 +1,21 @@
+{
+  "model_name": "gemma4:31b-cloud",
+  "host": "https://ollama.com/api/chat",
+  "auth": "environment_variable",
+  "max_tokens": 12288,
+  "timeout": 600,
+  "mode": "hybrid",
+  "ablation": "no_ast_gate",
+  "ablation_details": {
+    "name": "no_ast_gate",
+    "description": "w/o Gate 2: Skips deterministic AST invariant checking and AST repair (Tests arity drift & syntax crash rate in Z3)",
+    "enable_global_analysis": true,
+    "enable_joint_proposal": true,
+    "enable_blind_backtranslation": true,
+    "enable_semantic_verification": true,
+    "enable_semantic_repair": true,
+    "enable_ast_validation": false,
+    "enable_ast_repair": false,
+    "enable_registry": true
+  }
+}

@@ -1,0 +1,1238 @@
+[
+  {
+    "source": {
+      "dataset_index": 0,
+      "story_id": 406,
+      "example_id": 1131,
+      "premise_index": 4
+    },
+    "input": {
+      "premises": [
+        "All people who regularly drink coffee are dependent on caffeine.",
+        "People either regularly drink coffee or joke about being addicted to caffeine.",
+        "No one who jokes about being addicted to caffeine is unaware that caffeine is a drug.",
+        "Rina is either a student and unaware that caffeine is a drug, or neither a student nor unaware that caffeine is a drug.",
+        "If Rina is not a person dependent on caffeine and a student, then Rina is either a person dependent on caffeine and a student, or neither a person dependent on caffeine nor a student. "
+      ],
+      "question": "Rina is a person who jokes about being addicted to caffeine or unaware that caffeine is a drug."
+    },
+    "output": {
+      "global_analysis": {
+        "shared_meanings": [],
+        "related_chunks": [],
+        "entities": [],
+        "predicate_alignments": [
+          {
+            "mentions": [
+              "dependent on caffeine",
+              "a person dependent on caffeine"
+            ],
+            "canonical_meaning": "DependentOnCaffeine",
+            "relation": "same_meaning",
+            "evidence": [
+              "All people who regularly drink coffee are dependent on caffeine.",
+              "If Rina is not a person dependent on caffeine and a student, then ..."
+            ]
+          }
+        ],
+        "shared_events": [],
+        "argument_roles": {},
+        "coreference": [],
+        "scope_constraints": [
+          {
+            "source": "All people who regularly drink coffee are dependent on caffeine.",
+            "restriction": "regularly drink coffee",
+            "consequence": "dependent on caffeine",
+            "relation": "conditional"
+          },
+          {
+            "source": "No one who jokes about being addicted to caffeine is unaware that caffeine is a drug.",
+            "restriction": "jokes about being addicted to caffeine",
+            "consequence": "not unaware that caffeine is a drug",
+            "relation": "conditional_with_negated_consequence"
+          },
+          {
+            "source": "If Rina is not a person dependent on caffeine and a student, then Rina is either a person dependent on caffeine and a student, or neither a person dependent on caffeine nor a student.",
+            "antecedent_grouping": "not (dependent on caffeine and student)",
+            "consequence_grouping": "either (dependent on caffeine and student) or neither",
+            "relation": "implication"
+          }
+        ],
+        "context": [],
+        "must_remain_distinct": [],
+        "uncertainties": [],
+        "symbol_plan": [
+          {
+            "name": "RegularlyDrinkCoffee",
+            "kind": "predicate",
+            "meaning": "{0} regularly drinks coffee",
+            "argument_roles": [
+              "person"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "evidence": [
+              "All people who regularly drink coffee are dependent on caffeine."
+            ]
+          },
+          {
+            "name": "DependentOnCaffeine",
+            "kind": "predicate",
+            "meaning": "{0} is dependent on caffeine",
+            "argument_roles": [
+              "person"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "evidence": [
+              "All people who regularly drink coffee are dependent on caffeine."
+            ]
+          },
+          {
+            "name": "JokesAboutCaffeine",
+            "kind": "predicate",
+            "meaning": "{0} jokes about being addicted to caffeine",
+            "argument_roles": [
+              "person"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "evidence": [
+              "No one who jokes about being addicted to caffeine is unaware that caffeine is a drug."
+            ]
+          },
+          {
+            "name": "UnawareCaffeineIsDrug",
+            "kind": "predicate",
+            "meaning": "{0} is unaware that caffeine is a drug",
+            "argument_roles": [
+              "person"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "evidence": [
+              "No one who jokes about being addicted to caffeine is unaware that caffeine is a drug."
+            ]
+          },
+          {
+            "name": "Student",
+            "kind": "predicate",
+            "meaning": "{0} is a student",
+            "argument_roles": [
+              "person"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "evidence": [
+              "Rina is either a student and unaware that caffeine is a drug, or neither a student nor unaware that caffeine is a drug."
+            ]
+          }
+        ],
+        "domain_plan": {
+          "mode": "homogeneous",
+          "category": "person",
+          "evidence": [
+            "All people who regularly drink coffee are dependent on caffeine."
+          ],
+          "reason": "Use one consistent subject domain; preserve substantive restrictions in mixed discourse."
+        },
+        "discourse_referents": [],
+        "quantifier_plan": [
+          {
+            "label": "Premise 1",
+            "evidence": [
+              "All people who regularly drink coffee are dependent on caffeine."
+            ],
+            "interpretation": "generic",
+            "reason": "Read article together with story context and explicit quantifier."
+          },
+          {
+            "label": "Premise 2",
+            "evidence": [
+              "People either regularly drink coffee or joke about being addicted to caffeine."
+            ],
+            "interpretation": "generic",
+            "reason": "Read article together with story context and explicit quantifier."
+          },
+          {
+            "label": "Premise 3",
+            "evidence": [
+              "No one who jokes about being addicted to caffeine is unaware that caffeine is a drug."
+            ],
+            "interpretation": "generic",
+            "reason": "Read article together with story context and explicit quantifier."
+          },
+          {
+            "label": "Premise 4",
+            "evidence": [
+              "Rina is either a student and unaware that caffeine is a drug, or neither a student nor unaware that caffeine is a drug."
+            ],
+            "interpretation": "designated",
+            "reason": "Read article together with story context and explicit quantifier."
+          },
+          {
+            "label": "Premise 5",
+            "evidence": [
+              "If Rina is not a person dependent on caffeine and a student, then Rina is either a person dependent on caffeine and a student, or neither a person dependent on caffeine nor a student. "
+            ],
+            "interpretation": "designated",
+            "reason": "Read article together with story context and explicit quantifier."
+          },
+          {
+            "label": "Conclusion",
+            "evidence": [
+              "Rina is a person who jokes about being addicted to caffeine or unaware that caffeine is a drug."
+            ],
+            "interpretation": "designated",
+            "reason": "Read article together with story context and explicit quantifier."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "source": {
+      "dataset_index": 5,
+      "story_id": 8,
+      "example_id": 21,
+      "premise_index": 3
+    },
+    "input": {
+      "premises": [
+        "Miroslav Venhoda was a Czech choral conductor who specialized in the performance of Renaissance and Baroque music.",
+        "Any choral conductor is a musician.",
+        "Some musicians love music.",
+        "Miroslav Venhoda published a book in 1946 called Method of Studying Gregorian Chant."
+      ],
+      "question": "A Czech person wrote a book in 1946."
+    },
+    "output": {
+      "global_analysis": {
+        "shared_meanings": [],
+        "related_chunks": [],
+        "entities": [],
+        "predicate_alignments": [
+          {
+            "mentions": [
+              "published a book",
+              "wrote a book"
+            ],
+            "canonical_meaning": "shared_personal_work_semantics",
+            "relation": "shared_compositional_meaning",
+            "canonical_components": [
+              "Author",
+              "Book",
+              "PublishedIn"
+            ],
+            "evidence": [
+              "Miroslav Venhoda published a book in 1946 called Method of Studying Gregorian Chant.",
+              "A Czech person wrote a book in 1946."
+            ],
+            "note": "Align through shared Author/Book/PublishedIn semantics instead of forcing one monolithic surface predicate."
+          },
+          {
+            "mentions": [
+              "Czech choral conductor",
+              "Czech person"
+            ],
+            "canonical_meaning": "Czech",
+            "relation": "shared_property",
+            "evidence": [
+              "Miroslav Venhoda was a Czech choral conductor ...",
+              "A Czech person wrote a book in 1946."
+            ]
+          }
+        ],
+        "shared_events": [],
+        "argument_roles": {},
+        "coreference": [
+          {
+            "mention": "Miroslav Venhoda",
+            "refers_to": "MiroslavVenhoda"
+          },
+          {
+            "mention": "Method of Studying Gregorian Chant",
+            "refers_to": "MethodOfStudyingGregorianChant"
+          }
+        ],
+        "scope_constraints": [
+          {
+            "source": "Any choral conductor is a musician.",
+            "restriction": "choral conductor",
+            "consequence": "musician",
+            "relation": "conditional"
+          },
+          {
+            "source": "Some musicians love music.",
+            "restriction": "musician",
+            "consequence": "love music",
+            "relation": "existential_conjunction"
+          },
+          {
+            "source": "A Czech person wrote a book in 1946.",
+            "restriction": "Czech person",
+            "consequence": "authored a book that was published in 1946",
+            "relation": "existential_compositional_query"
+          }
+        ],
+        "context": [],
+        "must_remain_distinct": [],
+        "uncertainties": [],
+        "symbol_plan": [
+          {
+            "name": "Czech",
+            "kind": "predicate",
+            "meaning": "{0} is Czech",
+            "argument_roles": [
+              "person"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "evidence": [
+              "Miroslav Venhoda was a Czech choral conductor who specialized in the performance of Renaissance and Baroque music."
+            ]
+          },
+          {
+            "name": "ChoralConductor",
+            "kind": "predicate",
+            "meaning": "{0} is a choral conductor",
+            "argument_roles": [
+              "person"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "evidence": [
+              "Miroslav Venhoda was a Czech choral conductor who specialized in the performance of Renaissance and Baroque music."
+            ]
+          },
+          {
+            "name": "SpecializedInPerformance",
+            "kind": "predicate",
+            "meaning": "{0} specializes in performing {1}",
+            "argument_roles": [
+              "performer",
+              "music"
+            ],
+            "arg_sorts": [
+              "Entity",
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "evidence": [
+              "Miroslav Venhoda was a Czech choral conductor who specialized in the performance of Renaissance and Baroque music."
+            ]
+          },
+          {
+            "name": "Musician",
+            "kind": "predicate",
+            "meaning": "{0} is a musician",
+            "argument_roles": [
+              "person"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "evidence": [
+              "Any choral conductor is a musician."
+            ]
+          },
+          {
+            "name": "LovesMusic",
+            "kind": "predicate",
+            "meaning": "{0} loves music",
+            "argument_roles": [
+              "person"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "evidence": [
+              "Miroslav Venhoda was a Czech choral conductor who specialized in the performance of Renaissance and Baroque music."
+            ]
+          },
+          {
+            "name": "Book",
+            "kind": "predicate",
+            "meaning": "{0} is a book",
+            "argument_roles": [
+              "work"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "evidence": [
+              "Miroslav Venhoda published a book in 1946 called Method of Studying Gregorian Chant."
+            ]
+          },
+          {
+            "name": "Author",
+            "kind": "predicate",
+            "meaning": "{0} authored {1}",
+            "argument_roles": [
+              "author",
+              "work"
+            ],
+            "arg_sorts": [
+              "Entity",
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "evidence": [
+              "Miroslav Venhoda was a Czech choral conductor who specialized in the performance of Renaissance and Baroque music."
+            ]
+          },
+          {
+            "name": "PublishedIn",
+            "kind": "predicate",
+            "meaning": "{0} was published in {1}",
+            "argument_roles": [
+              "work",
+              "year"
+            ],
+            "arg_sorts": [
+              "Entity",
+              "IntSort()"
+            ],
+            "return_sort": "BoolSort()",
+            "evidence": [
+              "Miroslav Venhoda was a Czech choral conductor who specialized in the performance of Renaissance and Baroque music."
+            ]
+          }
+        ],
+        "domain_plan": {
+          "mode": "mixed",
+          "category": "entity",
+          "evidence": [
+            "Miroslav Venhoda was a Czech choral conductor who specialized in the performance of Renaissance and Baroque music."
+          ],
+          "reason": "Use one consistent subject domain; preserve substantive restrictions in mixed discourse."
+        },
+        "discourse_referents": [],
+        "quantifier_plan": [
+          {
+            "label": "Premise 1",
+            "evidence": [
+              "Miroslav Venhoda was a Czech choral conductor who specialized in the performance of Renaissance and Baroque music."
+            ],
+            "interpretation": "designated",
+            "reason": "Read article together with story context and explicit quantifier."
+          },
+          {
+            "label": "Premise 2",
+            "evidence": [
+              "Any choral conductor is a musician."
+            ],
+            "interpretation": "generic",
+            "reason": "Read article together with story context and explicit quantifier."
+          },
+          {
+            "label": "Premise 3",
+            "evidence": [
+              "Some musicians love music."
+            ],
+            "interpretation": "existential",
+            "reason": "Read article together with story context and explicit quantifier."
+          },
+          {
+            "label": "Premise 4",
+            "evidence": [
+              "Miroslav Venhoda published a book in 1946 called Method of Studying Gregorian Chant."
+            ],
+            "interpretation": "designated",
+            "reason": "Read article together with story context and explicit quantifier."
+          },
+          {
+            "label": "Conclusion",
+            "evidence": [
+              "A Czech person wrote a book in 1946."
+            ],
+            "interpretation": "existential",
+            "reason": "Read article together with story context and explicit quantifier."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "source": {
+      "kind": "synthetic",
+      "synthetic_id": "generic_vs_existential",
+      "dataset_index": "synthetic:generic_vs_existential"
+    },
+    "input": {
+      "premises": [
+        "A patient with a fever needs rest.",
+        "Some patients have a fever.",
+        "A desk is in the clinic."
+      ],
+      "question": "A patient with a fever needs rest."
+    },
+    "output": {
+      "global_analysis": {
+        "shared_meanings": [],
+        "related_chunks": [],
+        "entities": [],
+        "predicate_alignments": [],
+        "shared_events": [],
+        "argument_roles": {},
+        "coreference": [],
+        "scope_constraints": [],
+        "context": [],
+        "must_remain_distinct": [],
+        "uncertainties": [],
+        "symbol_plan": [
+          {
+            "name": "Patient",
+            "kind": "predicate",
+            "meaning": "{0} is a patient",
+            "argument_roles": [
+              "entity"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "evidence": [
+              "A patient with a fever needs rest."
+            ]
+          },
+          {
+            "name": "Fever",
+            "kind": "predicate",
+            "meaning": "{0} has a fever",
+            "argument_roles": [
+              "entity"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "evidence": [
+              "A patient with a fever needs rest."
+            ]
+          },
+          {
+            "name": "NeedsRest",
+            "kind": "predicate",
+            "meaning": "{0} needs rest",
+            "argument_roles": [
+              "entity"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "evidence": [
+              "A patient with a fever needs rest."
+            ]
+          },
+          {
+            "name": "Desk",
+            "kind": "predicate",
+            "meaning": "{0} is a desk",
+            "argument_roles": [
+              "entity"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "evidence": [
+              "A desk is in the clinic."
+            ]
+          },
+          {
+            "name": "InClinic",
+            "kind": "predicate",
+            "meaning": "{0} is in the clinic",
+            "argument_roles": [
+              "entity"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "evidence": [
+              "A desk is in the clinic."
+            ]
+          }
+        ],
+        "domain_plan": {
+          "mode": "mixed",
+          "category": "entity",
+          "evidence": [
+            "A patient with a fever needs rest."
+          ],
+          "reason": "Use one consistent subject domain; preserve substantive restrictions in mixed discourse."
+        },
+        "discourse_referents": [],
+        "quantifier_plan": [
+          {
+            "label": "Premise 1",
+            "evidence": [
+              "A patient with a fever needs rest."
+            ],
+            "interpretation": "generic",
+            "reason": "Source scope; no target label or inferred facts."
+          },
+          {
+            "label": "Premise 2",
+            "evidence": [
+              "Some patients have a fever."
+            ],
+            "interpretation": "existential",
+            "reason": "Source scope; no target label or inferred facts."
+          },
+          {
+            "label": "Premise 3",
+            "evidence": [
+              "A desk is in the clinic."
+            ],
+            "interpretation": "existential",
+            "reason": "Source scope; no target label or inferred facts."
+          },
+          {
+            "label": "Conclusion",
+            "evidence": [
+              "A patient with a fever needs rest."
+            ],
+            "interpretation": "generic",
+            "reason": "Keep query scope and the same source-grounded referent."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "source": {
+      "kind": "synthetic",
+      "synthetic_id": "designated_adviser",
+      "dataset_index": "synthetic:designated_adviser"
+    },
+    "input": {
+      "premises": [
+        "Orin consults his adviser.",
+        "His adviser is patient."
+      ],
+      "question": "Orin's adviser is patient."
+    },
+    "output": {
+      "global_analysis": {
+        "shared_meanings": [],
+        "related_chunks": [],
+        "entities": [
+          {
+            "canonical_name": "Orin",
+            "meaning": "Orin",
+            "evidence": [
+              "Orin consults his adviser."
+            ]
+          },
+          {
+            "canonical_name": "OrinsAdviser",
+            "meaning": "the same adviser of Orin referred to as his adviser",
+            "evidence": [
+              "Orin consults his adviser."
+            ]
+          }
+        ],
+        "predicate_alignments": [],
+        "shared_events": [],
+        "argument_roles": {},
+        "coreference": [
+          {
+            "mentions": [
+              "his adviser",
+              "Orin's adviser"
+            ],
+            "entity": "OrinsAdviser",
+            "evidence": [
+              "Orin consults his adviser.",
+              "His adviser is patient.",
+              "Orin's adviser is patient."
+            ]
+          }
+        ],
+        "scope_constraints": [],
+        "context": [],
+        "must_remain_distinct": [],
+        "uncertainties": [],
+        "symbol_plan": [
+          {
+            "name": "Consults",
+            "kind": "predicate",
+            "meaning": "{0} consults {1}",
+            "argument_roles": [
+              "person",
+              "adviser"
+            ],
+            "arg_sorts": [
+              "Entity",
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "evidence": [
+              "Orin consults his adviser."
+            ]
+          },
+          {
+            "name": "Patient",
+            "kind": "predicate",
+            "meaning": "{0} is patient",
+            "argument_roles": [
+              "person"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "evidence": [
+              "His adviser is patient."
+            ]
+          }
+        ],
+        "domain_plan": {
+          "mode": "mixed",
+          "category": "entity",
+          "evidence": [
+            "Orin consults his adviser."
+          ],
+          "reason": "Use one consistent subject domain; preserve substantive restrictions in mixed discourse."
+        },
+        "discourse_referents": [
+          {
+            "description": "Orin's adviser",
+            "representation": "designated_individual",
+            "evidence": [
+              "Orin consults his adviser.",
+              "His adviser is patient.",
+              "Orin's adviser is patient."
+            ],
+            "reason": "One definite anaphoric referent, not all possible advisers."
+          }
+        ],
+        "quantifier_plan": [
+          {
+            "label": "Premise 1",
+            "evidence": [
+              "Orin consults his adviser."
+            ],
+            "interpretation": "designated",
+            "reason": "Source scope; no target label or inferred facts."
+          },
+          {
+            "label": "Premise 2",
+            "evidence": [
+              "His adviser is patient."
+            ],
+            "interpretation": "designated",
+            "reason": "Source scope; no target label or inferred facts."
+          },
+          {
+            "label": "Conclusion",
+            "evidence": [
+              "Orin's adviser is patient."
+            ],
+            "interpretation": "designated",
+            "reason": "Keep query scope and the same source-grounded referent."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "source": {
+      "kind": "synthetic",
+      "synthetic_id": "class_not_constant",
+      "dataset_index": "synthetic:class_not_constant"
+    },
+    "input": {
+      "premises": [
+        "All archive algorithms are indexing algorithms.",
+        "Archive algorithms are not used to index Delta.",
+        "Aster is an archive algorithm."
+      ],
+      "question": "Aster is not used to index Delta."
+    },
+    "output": {
+      "global_analysis": {
+        "shared_meanings": [],
+        "related_chunks": [],
+        "entities": [
+          {
+            "canonical_name": "Aster",
+            "meaning": "the named algorithm Aster",
+            "evidence": [
+              "Aster is an archive algorithm."
+            ]
+          },
+          {
+            "canonical_name": "Delta",
+            "meaning": "the document Delta",
+            "evidence": [
+              "Archive algorithms are not used to index Delta."
+            ]
+          }
+        ],
+        "predicate_alignments": [],
+        "shared_events": [],
+        "argument_roles": {},
+        "coreference": [],
+        "scope_constraints": [],
+        "context": [],
+        "must_remain_distinct": [],
+        "uncertainties": [],
+        "symbol_plan": [
+          {
+            "name": "ArchiveAlgorithm",
+            "kind": "predicate",
+            "meaning": "{0} is an archive algorithm",
+            "argument_roles": [
+              "algorithm"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "evidence": [
+              "Aster is an archive algorithm."
+            ]
+          },
+          {
+            "name": "IndexingAlgorithm",
+            "kind": "predicate",
+            "meaning": "{0} is an indexing algorithm",
+            "argument_roles": [
+              "algorithm"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "evidence": [
+              "All archive algorithms are indexing algorithms."
+            ]
+          },
+          {
+            "name": "UsedToIndex",
+            "kind": "predicate",
+            "meaning": "{0} is used to index {1}",
+            "argument_roles": [
+              "algorithm",
+              "document"
+            ],
+            "arg_sorts": [
+              "Entity",
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "evidence": [
+              "Archive algorithms are not used to index Delta."
+            ]
+          }
+        ],
+        "domain_plan": {
+          "mode": "mixed",
+          "category": "entity",
+          "evidence": [
+            "All archive algorithms are indexing algorithms."
+          ],
+          "reason": "Use one consistent subject domain; preserve substantive restrictions in mixed discourse."
+        },
+        "discourse_referents": [],
+        "quantifier_plan": [
+          {
+            "label": "Premise 1",
+            "evidence": [
+              "All archive algorithms are indexing algorithms."
+            ],
+            "interpretation": "generic",
+            "reason": "Source scope; no target label or inferred facts."
+          },
+          {
+            "label": "Premise 2",
+            "evidence": [
+              "Archive algorithms are not used to index Delta."
+            ],
+            "interpretation": "generic",
+            "reason": "Source scope; no target label or inferred facts."
+          },
+          {
+            "label": "Premise 3",
+            "evidence": [
+              "Aster is an archive algorithm."
+            ],
+            "interpretation": "designated",
+            "reason": "Source scope; no target label or inferred facts."
+          },
+          {
+            "label": "Conclusion",
+            "evidence": [
+              "Aster is not used to index Delta."
+            ],
+            "interpretation": "designated",
+            "reason": "Keep query scope and the same source-grounded referent."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "source": {
+      "kind": "synthetic",
+      "synthetic_id": "location_and_roles",
+      "dataset_index": "synthetic:location_and_roles"
+    },
+    "input": {
+      "premises": [
+        "All buildings allowing pets permit residents to move in with their pets.",
+        "Jun is a resident and Pip is a pet owned by Jun.",
+        "Harbor House is a building that allows pets."
+      ],
+      "question": "Jun is permitted to move into Harbor House with Pip."
+    },
+    "output": {
+      "global_analysis": {
+        "shared_meanings": [],
+        "related_chunks": [],
+        "entities": [
+          {
+            "canonical_name": "Jun",
+            "meaning": "Jun",
+            "evidence": [
+              "Jun is a resident and Pip is a pet owned by Jun."
+            ]
+          },
+          {
+            "canonical_name": "Pip",
+            "meaning": "Pip",
+            "evidence": [
+              "Jun is a resident and Pip is a pet owned by Jun."
+            ]
+          },
+          {
+            "canonical_name": "HarborHouse",
+            "meaning": "Harbor House",
+            "evidence": [
+              "Harbor House is a building that allows pets."
+            ]
+          }
+        ],
+        "predicate_alignments": [
+          {
+            "mentions": [
+              "permit residents to move in",
+              "is permitted to move into"
+            ],
+            "canonical_meaning": "PermittedMoveIn",
+            "relation": "same_meaning",
+            "argument_roles": [
+              "person",
+              "building",
+              "pet"
+            ],
+            "evidence": [
+              "All buildings allowing pets permit residents to move in with their pets.",
+              "Jun is permitted to move into Harbor House with Pip."
+            ]
+          }
+        ],
+        "shared_events": [],
+        "argument_roles": {},
+        "coreference": [],
+        "scope_constraints": [],
+        "context": [],
+        "must_remain_distinct": [],
+        "uncertainties": [],
+        "symbol_plan": [
+          {
+            "name": "Building",
+            "kind": "predicate",
+            "meaning": "{0} is a building",
+            "argument_roles": [
+              "building"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "evidence": [
+              "Harbor House is a building that allows pets."
+            ]
+          },
+          {
+            "name": "AllowsPets",
+            "kind": "predicate",
+            "meaning": "{0} allows pets",
+            "argument_roles": [
+              "building"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "evidence": [
+              "Harbor House is a building that allows pets."
+            ]
+          },
+          {
+            "name": "Resident",
+            "kind": "predicate",
+            "meaning": "{0} is a resident",
+            "argument_roles": [
+              "person"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "evidence": [
+              "Jun is a resident and Pip is a pet owned by Jun."
+            ]
+          },
+          {
+            "name": "Pet",
+            "kind": "predicate",
+            "meaning": "{0} is a pet",
+            "argument_roles": [
+              "pet"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "evidence": [
+              "Jun is a resident and Pip is a pet owned by Jun."
+            ]
+          },
+          {
+            "name": "Owns",
+            "kind": "predicate",
+            "meaning": "{0} owns {1}",
+            "argument_roles": [
+              "owner",
+              "pet"
+            ],
+            "arg_sorts": [
+              "Entity",
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "evidence": [
+              "All buildings allowing pets permit residents to move in with their pets."
+            ]
+          },
+          {
+            "name": "PermittedMoveIn",
+            "kind": "predicate",
+            "meaning": "{0} is permitted to move into {1} with {2}",
+            "argument_roles": [
+              "person",
+              "building",
+              "pet"
+            ],
+            "arg_sorts": [
+              "Entity",
+              "Entity",
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "evidence": [
+              "Jun is permitted to move into Harbor House with Pip."
+            ]
+          }
+        ],
+        "domain_plan": {
+          "mode": "mixed",
+          "category": "entity",
+          "evidence": [
+            "All buildings allowing pets permit residents to move in with their pets."
+          ],
+          "reason": "Use one consistent subject domain; preserve substantive restrictions in mixed discourse."
+        },
+        "discourse_referents": [],
+        "quantifier_plan": [
+          {
+            "label": "Premise 1",
+            "evidence": [
+              "All buildings allowing pets permit residents to move in with their pets."
+            ],
+            "interpretation": "generic",
+            "reason": "Source scope; no target label or inferred facts."
+          },
+          {
+            "label": "Premise 2",
+            "evidence": [
+              "Jun is a resident and Pip is a pet owned by Jun."
+            ],
+            "interpretation": "designated",
+            "reason": "Source scope; no target label or inferred facts."
+          },
+          {
+            "label": "Premise 3",
+            "evidence": [
+              "Harbor House is a building that allows pets."
+            ],
+            "interpretation": "designated",
+            "reason": "Source scope; no target label or inferred facts."
+          },
+          {
+            "label": "Conclusion",
+            "evidence": [
+              "Jun is permitted to move into Harbor House with Pip."
+            ],
+            "interpretation": "designated",
+            "reason": "Keep query scope and the same source-grounded referent."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "source": {
+      "kind": "synthetic",
+      "synthetic_id": "classes_can_overlap",
+      "dataset_index": "synthetic:classes_can_overlap"
+    },
+    "input": {
+      "premises": [
+        "All finches are birds.",
+        "All sparrows are birds.",
+        "Tavi is a finch."
+      ],
+      "question": "Tavi is a sparrow."
+    },
+    "output": {
+      "global_analysis": {
+        "shared_meanings": [],
+        "related_chunks": [],
+        "entities": [
+          {
+            "canonical_name": "Tavi",
+            "meaning": "Tavi",
+            "evidence": [
+              "Tavi is a finch."
+            ]
+          }
+        ],
+        "predicate_alignments": [],
+        "shared_events": [],
+        "argument_roles": {},
+        "coreference": [],
+        "scope_constraints": [],
+        "context": [],
+        "must_remain_distinct": [
+          "Finch and Sparrow are distinct properties; Bird as shared superclass does not assert their disjointness."
+        ],
+        "uncertainties": [],
+        "symbol_plan": [
+          {
+            "name": "Finch",
+            "kind": "predicate",
+            "meaning": "{0} is a finch",
+            "argument_roles": [
+              "animal"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "evidence": [
+              "Tavi is a finch."
+            ]
+          },
+          {
+            "name": "Bird",
+            "kind": "predicate",
+            "meaning": "{0} is a bird",
+            "argument_roles": [
+              "animal"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "evidence": [
+              "All finches are birds."
+            ]
+          },
+          {
+            "name": "Sparrow",
+            "kind": "predicate",
+            "meaning": "{0} is a sparrow",
+            "argument_roles": [
+              "animal"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "evidence": [
+              "Tavi is a sparrow."
+            ]
+          }
+        ],
+        "domain_plan": {
+          "mode": "mixed",
+          "category": "entity",
+          "evidence": [
+            "All finches are birds."
+          ],
+          "reason": "Use one consistent subject domain; preserve substantive restrictions in mixed discourse."
+        },
+        "discourse_referents": [],
+        "quantifier_plan": [
+          {
+            "label": "Premise 1",
+            "evidence": [
+              "All finches are birds."
+            ],
+            "interpretation": "generic",
+            "reason": "Source scope; no target label or inferred facts."
+          },
+          {
+            "label": "Premise 2",
+            "evidence": [
+              "All sparrows are birds."
+            ],
+            "interpretation": "generic",
+            "reason": "Source scope; no target label or inferred facts."
+          },
+          {
+            "label": "Premise 3",
+            "evidence": [
+              "Tavi is a finch."
+            ],
+            "interpretation": "designated",
+            "reason": "Source scope; no target label or inferred facts."
+          },
+          {
+            "label": "Conclusion",
+            "evidence": [
+              "Tavi is a sparrow."
+            ],
+            "interpretation": "designated",
+            "reason": "Keep query scope and the same source-grounded referent."
+          }
+        ]
+      }
+    }
+  }
+]

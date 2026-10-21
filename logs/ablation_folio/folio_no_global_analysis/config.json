@@ -1,0 +1,21 @@
+{
+  "model_name": "gemma4:31b-cloud",
+  "host": "https://ollama.com/api/chat",
+  "auth": "environment_variable",
+  "max_tokens": 12288,
+  "timeout": 600,
+  "mode": "hybrid",
+  "ablation": "no_global_analysis",
+  "ablation_details": {
+    "name": "no_global_analysis",
+    "description": "w/o LLM Global Analysis: Skips global-analysis call and its symbol plan; keeps deterministic alignment/domain plans, all downstream gates, and persistent Registry",
+    "enable_global_analysis": false,
+    "enable_joint_proposal": true,
+    "enable_blind_backtranslation": true,
+    "enable_semantic_verification": true,
+    "enable_semantic_repair": true,
+    "enable_ast_validation": true,
+    "enable_ast_repair": true,
+    "enable_registry": true
+  }
+}

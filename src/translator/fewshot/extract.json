@@ -1,0 +1,741 @@
+[
+  {
+    "source": {
+      "dataset_index": 0,
+      "story_id": 406,
+      "example_id": 1131,
+      "premise_index": 4
+    },
+    "input": {
+      "source_nl": "If Rina is not a person dependent on caffeine and a student, then Rina is either a person dependent on caffeine and a student, or neither a person dependent on caffeine nor a student. ",
+      "accepted_fol": "not (DependentOnCaffeine(Rina) and Student(Rina)) -> ((DependentOnCaffeine(Rina) and Student(Rina)) xor (not DependentOnCaffeine(Rina) and not Student(Rina)))",
+      "ast": {
+        "id": 1,
+        "type": "BinaryOp",
+        "meaning": "implies",
+        "operator": "→",
+        "formula": "¬(DependentOnCaffeine(Rina) ∧ Student(Rina)) →((DependentOnCaffeine(Rina) ∧ Student(Rina)) ⊕(¬DependentOnCaffeine(Rina) ∧ ¬Student(Rina)))",
+        "left": {
+          "id": 2,
+          "type": "UnaryOp",
+          "meaning": "not",
+          "operator": "¬",
+          "formula": "¬(DependentOnCaffeine(Rina) ∧ Student(Rina))",
+          "operand": {
+            "id": 3,
+            "type": "BinaryOp",
+            "meaning": "and",
+            "operator": "∧",
+            "formula": "DependentOnCaffeine(Rina) ∧ Student(Rina)",
+            "left": {
+              "id": 5,
+              "type": "Atom",
+              "meaning": "predicate",
+              "name": "DependentOnCaffeine",
+              "formula": "DependentOnCaffeine(Rina)",
+              "args": [
+                {
+                  "id": 4,
+                  "type": "Var",
+                  "name": "Rina",
+                  "formula": "Rina",
+                  "sort": "Entity"
+                }
+              ],
+              "return_sort": "BoolSort()"
+            },
+            "right": {
+              "id": 7,
+              "type": "Atom",
+              "meaning": "predicate",
+              "name": "Student",
+              "formula": "Student(Rina)",
+              "args": [
+                {
+                  "id": 6,
+                  "type": "Var",
+                  "name": "Rina",
+                  "formula": "Rina",
+                  "sort": "Entity"
+                }
+              ],
+              "return_sort": "BoolSort()"
+            }
+          }
+        },
+        "right": {
+          "id": 8,
+          "type": "BinaryOp",
+          "meaning": "xor",
+          "operator": "⊕",
+          "formula": "(DependentOnCaffeine(Rina) ∧ Student(Rina)) ⊕(¬DependentOnCaffeine(Rina) ∧ ¬Student(Rina))",
+          "left": {
+            "id": 9,
+            "type": "BinaryOp",
+            "meaning": "and",
+            "operator": "∧",
+            "formula": "DependentOnCaffeine(Rina) ∧ Student(Rina)",
+            "left": {
+              "id": 11,
+              "type": "Atom",
+              "meaning": "predicate",
+              "name": "DependentOnCaffeine",
+              "formula": "DependentOnCaffeine(Rina)",
+              "args": [
+                {
+                  "id": 10,
+                  "type": "Var",
+                  "name": "Rina",
+                  "formula": "Rina",
+                  "sort": "Entity"
+                }
+              ],
+              "return_sort": "BoolSort()"
+            },
+            "right": {
+              "id": 13,
+              "type": "Atom",
+              "meaning": "predicate",
+              "name": "Student",
+              "formula": "Student(Rina)",
+              "args": [
+                {
+                  "id": 12,
+                  "type": "Var",
+                  "name": "Rina",
+                  "formula": "Rina",
+                  "sort": "Entity"
+                }
+              ],
+              "return_sort": "BoolSort()"
+            }
+          },
+          "right": {
+            "id": 14,
+            "type": "BinaryOp",
+            "meaning": "and",
+            "operator": "∧",
+            "formula": "¬DependentOnCaffeine(Rina) ∧ ¬Student(Rina)",
+            "left": {
+              "id": 15,
+              "type": "UnaryOp",
+              "meaning": "not",
+              "operator": "¬",
+              "formula": "¬DependentOnCaffeine(Rina)",
+              "operand": {
+                "id": 17,
+                "type": "Atom",
+                "meaning": "predicate",
+                "name": "DependentOnCaffeine",
+                "formula": "DependentOnCaffeine(Rina)",
+                "args": [
+                  {
+                    "id": 16,
+                    "type": "Var",
+                    "name": "Rina",
+                    "formula": "Rina",
+                    "sort": "Entity"
+                  }
+                ],
+                "return_sort": "BoolSort()"
+              }
+            },
+            "right": {
+              "id": 18,
+              "type": "UnaryOp",
+              "meaning": "not",
+              "operator": "¬",
+              "formula": "¬Student(Rina)",
+              "operand": {
+                "id": 20,
+                "type": "Atom",
+                "meaning": "predicate",
+                "name": "Student",
+                "formula": "Student(Rina)",
+                "args": [
+                  {
+                    "id": 19,
+                    "type": "Var",
+                    "name": "Rina",
+                    "formula": "Rina",
+                    "sort": "Entity"
+                  }
+                ],
+                "return_sort": "BoolSort()"
+              }
+            }
+          }
+        }
+      },
+      "declarations": {
+        "symbols": {
+          "DependentOnCaffeine": {
+            "kind": "predicate",
+            "meaning": "{0} is dependent on caffeine",
+            "argument_roles": [
+              "person"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()"
+          },
+          "Student": {
+            "kind": "predicate",
+            "meaning": "{0} is a student",
+            "argument_roles": [
+              "person"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()"
+          }
+        },
+        "entities": {
+          "Rina": {
+            "meaning": "Rina",
+            "sort": "Entity"
+          }
+        }
+      },
+      "global_analysis": {
+        "domain_plan": {
+          "mode": "homogeneous",
+          "category": "person",
+          "evidence": [
+            "All people who regularly drink coffee are dependent on caffeine."
+          ],
+          "reason": "Use one consistent subject domain; preserve substantive restrictions in mixed discourse."
+        },
+        "quantifier_plan": [
+          {
+            "label": "Conclusion",
+            "evidence": [
+              "Rina is a person who jokes about being addicted to caffeine or unaware that caffeine is a drug."
+            ],
+            "interpretation": "designated",
+            "reason": "Read article together with story context and explicit quantifier."
+          }
+        ],
+        "predicate_alignments": [
+          {
+            "mentions": [
+              "dependent on caffeine",
+              "a person dependent on caffeine"
+            ],
+            "canonical_meaning": "DependentOnCaffeine",
+            "relation": "same_meaning",
+            "evidence": [
+              "All people who regularly drink coffee are dependent on caffeine.",
+              "If Rina is not a person dependent on caffeine and a student, then ..."
+            ]
+          }
+        ]
+      },
+      "registry": {
+        "symbols": {
+          "DependentOnCaffeine": {
+            "kind": "predicate",
+            "meaning": "{0} is dependent on caffeine",
+            "argument_roles": [
+              "person"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "provenance": [
+              "Premise 1"
+            ]
+          },
+          "Student": {
+            "kind": "predicate",
+            "meaning": "{0} is a student",
+            "argument_roles": [
+              "person"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "provenance": [
+              "Premise 4"
+            ]
+          }
+        },
+        "entities": {
+          "Rina": {
+            "meaning": "Rina",
+            "sort": "Entity",
+            "provenance": [
+              "Premise 4"
+            ]
+          }
+        },
+        "atomics": [],
+        "chunks": [],
+        "aliases": [],
+        "links": [],
+        "sources": []
+      }
+    },
+    "output": {
+      "atomics": [
+        {
+          "fol": "DependentOnCaffeine(Rina)",
+          "meaning": "Rina is dependent on caffeine"
+        },
+        {
+          "fol": "Student(Rina)",
+          "meaning": "Rina is a student"
+        }
+      ],
+      "chunks": [
+        {
+          "fol": "not (DependentOnCaffeine(Rina) and Student(Rina)) -> ((DependentOnCaffeine(Rina) and Student(Rina)) xor (not DependentOnCaffeine(Rina) and not Student(Rina)))",
+          "meaning": "if (it is not the case that ((Rina is dependent on caffeine) and (Rina is a student))), then (exactly one of the alternatives ((Rina is dependent on caffeine) and (Rina is a student)) or ((it is not the case that (Rina is dependent on caffeine)) and (it is not the case that (Rina is a student))) holds, but not both)."
+        }
+      ],
+      "aliases": [],
+      "links": []
+    }
+  },
+  {
+    "source": {
+      "dataset_index": 10,
+      "story_id": 133,
+      "example_id": 393,
+      "premise_index": 2
+    },
+    "input": {
+      "source_nl": "The Emmet Building is a five-story building in Portland, Oregon.",
+      "accepted_fol": "Building(EmmetBuilding) and HasStoreys(EmmetBuilding, 5) and LocatedIn(EmmetBuilding, Portland) and LocatedIn(Portland, Oregon)",
+      "ast": {
+        "id": 1,
+        "type": "BinaryOp",
+        "meaning": "and",
+        "operator": "∧",
+        "formula": "Building(EmmetBuilding) ∧ HasStoreys(EmmetBuilding, 5) ∧ LocatedIn(EmmetBuilding, Portland) ∧ LocatedIn(Portland, Oregon)",
+        "left": {
+          "id": 2,
+          "type": "BinaryOp",
+          "meaning": "and",
+          "operator": "∧",
+          "formula": "Building(EmmetBuilding) ∧ HasStoreys(EmmetBuilding, 5) ∧ LocatedIn(EmmetBuilding, Portland)",
+          "left": {
+            "id": 3,
+            "type": "BinaryOp",
+            "meaning": "and",
+            "operator": "∧",
+            "formula": "Building(EmmetBuilding) ∧ HasStoreys(EmmetBuilding, 5)",
+            "left": {
+              "id": 5,
+              "type": "Atom",
+              "meaning": "predicate",
+              "name": "Building",
+              "formula": "Building(EmmetBuilding)",
+              "args": [
+                {
+                  "id": 4,
+                  "type": "Var",
+                  "name": "EmmetBuilding",
+                  "formula": "EmmetBuilding",
+                  "sort": "Entity"
+                }
+              ],
+              "return_sort": "BoolSort()"
+            },
+            "right": {
+              "id": 8,
+              "type": "Atom",
+              "meaning": "predicate",
+              "name": "HasStoreys",
+              "formula": "HasStoreys(EmmetBuilding, 5)",
+              "args": [
+                {
+                  "id": 6,
+                  "type": "Var",
+                  "name": "EmmetBuilding",
+                  "formula": "EmmetBuilding",
+                  "sort": "Entity"
+                },
+                {
+                  "id": 7,
+                  "type": "NumConstant",
+                  "name": "5",
+                  "formula": "5",
+                  "sort": "IntSort()"
+                }
+              ],
+              "return_sort": "BoolSort()"
+            }
+          },
+          "right": {
+            "id": 11,
+            "type": "Atom",
+            "meaning": "predicate",
+            "name": "LocatedIn",
+            "formula": "LocatedIn(EmmetBuilding, Portland)",
+            "args": [
+              {
+                "id": 9,
+                "type": "Var",
+                "name": "EmmetBuilding",
+                "formula": "EmmetBuilding",
+                "sort": "Entity"
+              },
+              {
+                "id": 10,
+                "type": "Var",
+                "name": "Portland",
+                "formula": "Portland",
+                "sort": "Entity"
+              }
+            ],
+            "return_sort": "BoolSort()"
+          }
+        },
+        "right": {
+          "id": 14,
+          "type": "Atom",
+          "meaning": "predicate",
+          "name": "LocatedIn",
+          "formula": "LocatedIn(Portland, Oregon)",
+          "args": [
+            {
+              "id": 12,
+              "type": "Var",
+              "name": "Portland",
+              "formula": "Portland",
+              "sort": "Entity"
+            },
+            {
+              "id": 13,
+              "type": "Var",
+              "name": "Oregon",
+              "formula": "Oregon",
+              "sort": "Entity"
+            }
+          ],
+          "return_sort": "BoolSort()"
+        }
+      },
+      "declarations": {
+        "symbols": {
+          "Building": {
+            "kind": "predicate",
+            "meaning": "{0} is a building",
+            "argument_roles": [
+              "building"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()"
+          },
+          "HasStoreys": {
+            "kind": "predicate",
+            "meaning": "{0} has {1} storeys",
+            "argument_roles": [
+              "building",
+              "count"
+            ],
+            "arg_sorts": [
+              "Entity",
+              "IntSort()"
+            ],
+            "return_sort": "BoolSort()"
+          },
+          "LocatedIn": {
+            "kind": "predicate",
+            "meaning": "{0} is located in {1}",
+            "argument_roles": [
+              "located_entity",
+              "location"
+            ],
+            "arg_sorts": [
+              "Entity",
+              "Entity"
+            ],
+            "return_sort": "BoolSort()"
+          }
+        },
+        "entities": {
+          "EmmetBuilding": {
+            "meaning": "EmmetBuilding",
+            "sort": "Entity"
+          },
+          "Portland": {
+            "meaning": "Portland",
+            "sort": "Entity"
+          },
+          "Oregon": {
+            "meaning": "Oregon",
+            "sort": "Entity"
+          }
+        }
+      },
+      "global_analysis": {
+        "domain_plan": {
+          "mode": "mixed",
+          "category": "entity",
+          "evidence": [
+            "The Blake McFall Company Building is a commercial warehouse listed on the National Register of Historic Places."
+          ],
+          "reason": "Use one consistent subject domain; preserve substantive restrictions in mixed discourse."
+        },
+        "quantifier_plan": [
+          {
+            "label": "Conclusion",
+            "evidence": [
+              "A five-story building is built in 1915."
+            ],
+            "interpretation": "existential",
+            "reason": "Read article together with story context and explicit quantifier."
+          }
+        ],
+        "predicate_alignments": [
+          {
+            "mentions": [
+              "was built in 1915",
+              "is built in 1915"
+            ],
+            "canonical_meaning": "BuiltIn",
+            "relation": "same_meaning",
+            "evidence": [
+              "The Emmet Building was built in 1915.",
+              "A five-story building is built in 1915."
+            ]
+          }
+        ]
+      },
+      "registry": {
+        "symbols": {},
+        "entities": {
+          "BlakeMcFallCompanyBuilding": {
+            "meaning": "BlakeMcFallCompanyBuilding",
+            "sort": "Entity",
+            "provenance": [
+              "Premise 1",
+              "Premise 2"
+            ]
+          },
+          "NationalRegisterOfHistoricPlaces": {
+            "meaning": "NationalRegisterOfHistoricPlaces",
+            "sort": "Entity",
+            "provenance": [
+              "Premise 1",
+              "Premise 2"
+            ]
+          }
+        },
+        "atomics": [],
+        "chunks": [],
+        "aliases": [],
+        "links": [],
+        "sources": []
+      }
+    },
+    "output": {
+      "atomics": [
+        {
+          "fol": "Building(EmmetBuilding)",
+          "meaning": "EmmetBuilding is a building"
+        },
+        {
+          "fol": "HasStoreys(EmmetBuilding, 5)",
+          "meaning": "EmmetBuilding has 5 storeys"
+        },
+        {
+          "fol": "LocatedIn(EmmetBuilding, Portland)",
+          "meaning": "EmmetBuilding is located in Portland"
+        },
+        {
+          "fol": "LocatedIn(Portland, Oregon)",
+          "meaning": "Portland is located in Oregon"
+        }
+      ],
+      "chunks": [
+        {
+          "fol": "Building(EmmetBuilding) and HasStoreys(EmmetBuilding, 5) and LocatedIn(EmmetBuilding, Portland) and LocatedIn(Portland, Oregon)",
+          "meaning": "(((EmmetBuilding is a building) and (EmmetBuilding has 5 storeys)) and (EmmetBuilding is located in Portland)) and (Portland is located in Oregon)."
+        }
+      ],
+      "aliases": [],
+      "links": []
+    }
+  },
+  {
+    "source": {
+      "kind": "synthetic",
+      "synthetic_id": "location_and_roles",
+      "dataset_index": "synthetic:location_and_roles"
+    },
+    "input": {
+      "source_nl": "Harbor House is a building that allows pets.",
+      "accepted_fol": "(Building(HarborHouse) and AllowsPets(HarborHouse))",
+      "ast": {
+        "id": 1,
+        "type": "BinaryOp",
+        "meaning": "and",
+        "operator": "∧",
+        "formula": "Building(HarborHouse) ∧ AllowsPets(HarborHouse)",
+        "left": {
+          "id": 3,
+          "type": "Atom",
+          "meaning": "predicate",
+          "name": "Building",
+          "formula": "Building(HarborHouse)",
+          "args": [
+            {
+              "id": 2,
+              "type": "Var",
+              "name": "HarborHouse",
+              "formula": "HarborHouse",
+              "sort": "Entity"
+            }
+          ],
+          "return_sort": "BoolSort()"
+        },
+        "right": {
+          "id": 5,
+          "type": "Atom",
+          "meaning": "predicate",
+          "name": "AllowsPets",
+          "formula": "AllowsPets(HarborHouse)",
+          "args": [
+            {
+              "id": 4,
+              "type": "Var",
+              "name": "HarborHouse",
+              "formula": "HarborHouse",
+              "sort": "Entity"
+            }
+          ],
+          "return_sort": "BoolSort()"
+        }
+      },
+      "declarations": {
+        "symbols": {
+          "Building": {
+            "kind": "predicate",
+            "meaning": "{0} is a building",
+            "argument_roles": [
+              "building"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()"
+          },
+          "AllowsPets": {
+            "kind": "predicate",
+            "meaning": "{0} allows pets",
+            "argument_roles": [
+              "building"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()"
+          }
+        },
+        "entities": {
+          "HarborHouse": {
+            "meaning": "Harbor House",
+            "sort": "Entity"
+          }
+        }
+      },
+      "registry": {
+        "symbols": {
+          "Building": {
+            "kind": "predicate",
+            "meaning": "{0} is a building",
+            "argument_roles": [
+              "building"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "provenance": [
+              "Premise 1",
+              "Premise 3"
+            ]
+          },
+          "AllowsPets": {
+            "kind": "predicate",
+            "meaning": "{0} allows pets",
+            "argument_roles": [
+              "building"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "provenance": [
+              "Premise 1",
+              "Premise 3"
+            ]
+          }
+        },
+        "entities": {
+          "Jun": {
+            "meaning": "Jun",
+            "sort": "Entity",
+            "provenance": [
+              "Premise 2"
+            ]
+          },
+          "Pip": {
+            "meaning": "Pip",
+            "sort": "Entity",
+            "provenance": [
+              "Premise 2"
+            ]
+          },
+          "HarborHouse": {
+            "meaning": "Harbor House",
+            "sort": "Entity",
+            "provenance": [
+              "Premise 3"
+            ]
+          }
+        },
+        "atomics": [],
+        "chunks": [],
+        "aliases": [],
+        "links": [],
+        "sources": []
+      }
+    },
+    "output": {
+      "atomics": [
+        {
+          "fol": "Building(HarborHouse)",
+          "meaning": ""
+        },
+        {
+          "fol": "AllowsPets(HarborHouse)",
+          "meaning": ""
+        }
+      ],
+      "chunks": [
+        {
+          "fol": "(Building(HarborHouse) and AllowsPets(HarborHouse))",
+          "meaning": "A building allowing pets"
+        }
+      ],
+      "aliases": [
+        {
+          "kind": "entity",
+          "target": "HarborHouse",
+          "alias": "Harbor House"
+        }
+      ],
+      "links": []
+    }
+  }
+]

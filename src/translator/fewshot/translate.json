@@ -1,0 +1,1268 @@
+[
+  {
+    "source": {
+      "dataset_index": 0,
+      "story_id": 406,
+      "example_id": 1131,
+      "premise_index": 4
+    },
+    "input": {
+      "sentence": "If Rina is not a person dependent on caffeine and a student, then Rina is either a person dependent on caffeine and a student, or neither a person dependent on caffeine nor a student. ",
+      "label": "Premise 5",
+      "global_analysis": {
+        "domain_plan": {
+          "mode": "homogeneous",
+          "category": "person",
+          "evidence": [
+            "All people who regularly drink coffee are dependent on caffeine."
+          ],
+          "reason": "Use one consistent subject domain; preserve substantive restrictions in mixed discourse."
+        },
+        "quantifier_plan": [
+          {
+            "label": "Premise 5",
+            "evidence": [
+              "If Rina is not a person dependent on caffeine and a student, then Rina is either a person dependent on caffeine and a student, or neither a person dependent on caffeine nor a student. "
+            ],
+            "interpretation": "designated",
+            "reason": "Read article together with story context and explicit quantifier."
+          }
+        ],
+        "predicate_alignments": [
+          {
+            "mentions": [
+              "dependent on caffeine",
+              "a person dependent on caffeine"
+            ],
+            "canonical_meaning": "DependentOnCaffeine",
+            "relation": "same_meaning",
+            "evidence": [
+              "All people who regularly drink coffee are dependent on caffeine.",
+              "If Rina is not a person dependent on caffeine and a student, then ..."
+            ]
+          }
+        ]
+      },
+      "registry": {
+        "symbols": {
+          "DependentOnCaffeine": {
+            "kind": "predicate",
+            "meaning": "{0} is dependent on caffeine",
+            "argument_roles": [
+              "person"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "provenance": [
+              "Premise 1"
+            ]
+          },
+          "Student": {
+            "kind": "predicate",
+            "meaning": "{0} is a student",
+            "argument_roles": [
+              "person"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "provenance": [
+              "Premise 4"
+            ]
+          }
+        },
+        "entities": {
+          "Rina": {
+            "meaning": "Rina",
+            "sort": "Entity",
+            "provenance": [
+              "Premise 4"
+            ]
+          }
+        },
+        "atomics": [],
+        "chunks": [],
+        "aliases": [],
+        "links": [],
+        "sources": []
+      },
+      "feedback": {
+        "previous_fol": "(not DependentOnCaffeine(Rina) and Student(Rina)) -> ((DependentOnCaffeine(Rina) and Student(Rina)) xor (not DependentOnCaffeine(Rina) and not Student(Rina)))",
+        "back_translation": "if ((it is not the case that (Rina is dependent on caffeine)) and (Rina is a student)), then (exactly one of the alternatives ((Rina is dependent on caffeine) and (Rina is a student)) or ((it is not the case that (Rina is dependent on caffeine)) and (it is not the case that (Rina is a student))) holds, but not both).",
+        "verifier_feedback": {
+          "equivalent": false,
+          "issues": [
+            "The source negates the whole coordinated noun phrase, but the candidate negates only dependence and asserts Student in the antecedent. This is a concrete scope error under policy, not optional ambiguity."
+          ],
+          "suggested_corrections": [
+            "Use joint negation scope and no additional Person predicate: not (DependentOnCaffeine(Rina) and Student(Rina)) -> ((DependentOnCaffeine(Rina) and Student(Rina)) xor (not DependentOnCaffeine(Rina) and not Student(Rina)))"
+          ]
+        },
+        "ast_validation": {
+          "status": "not_run"
+        },
+        "error": "Semantic verification rejected translation"
+      }
+    },
+    "output": {
+      "fol": "not (DependentOnCaffeine(Rina) and Student(Rina)) -> ((DependentOnCaffeine(Rina) and Student(Rina)) xor (not DependentOnCaffeine(Rina) and not Student(Rina)))",
+      "declarations": {
+        "symbols": {
+          "DependentOnCaffeine": {
+            "kind": "predicate",
+            "meaning": "{0} is dependent on caffeine",
+            "argument_roles": [
+              "person"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()"
+          },
+          "Student": {
+            "kind": "predicate",
+            "meaning": "{0} is a student",
+            "argument_roles": [
+              "person"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()"
+          }
+        },
+        "entities": {
+          "Rina": {
+            "meaning": "Rina",
+            "sort": "Entity"
+          }
+        }
+      }
+    }
+  },
+  {
+    "source": {
+      "dataset_index": 5,
+      "story_id": 8,
+      "example_id": 21,
+      "premise_index": null,
+      "sentence_kind": "question"
+    },
+    "input": {
+      "sentence": "A Czech person wrote a book in 1946.",
+      "label": "Conclusion",
+      "global_analysis": {
+        "domain_plan": {
+          "mode": "mixed",
+          "category": "entity",
+          "evidence": [
+            "Miroslav Venhoda was a Czech choral conductor who specialized in the performance of Renaissance and Baroque music."
+          ],
+          "reason": "Use one consistent subject domain; preserve substantive restrictions in mixed discourse."
+        },
+        "quantifier_plan": [
+          {
+            "label": "Conclusion",
+            "evidence": [
+              "A Czech person wrote a book in 1946."
+            ],
+            "interpretation": "existential",
+            "reason": "Read article together with story context and explicit quantifier."
+          }
+        ],
+        "predicate_alignments": [
+          {
+            "mentions": [
+              "published a book",
+              "wrote a book"
+            ],
+            "canonical_meaning": "shared_personal_work_semantics",
+            "relation": "shared_compositional_meaning",
+            "canonical_components": [
+              "Author",
+              "Book",
+              "PublishedIn"
+            ],
+            "evidence": [
+              "Miroslav Venhoda published a book in 1946 called Method of Studying Gregorian Chant.",
+              "A Czech person wrote a book in 1946."
+            ],
+            "note": "Align through shared Author/Book/PublishedIn semantics instead of forcing one monolithic surface predicate."
+          },
+          {
+            "mentions": [
+              "Czech choral conductor",
+              "Czech person"
+            ],
+            "canonical_meaning": "Czech",
+            "relation": "shared_property",
+            "evidence": [
+              "Miroslav Venhoda was a Czech choral conductor ...",
+              "A Czech person wrote a book in 1946."
+            ]
+          }
+        ]
+      },
+      "registry": {
+        "symbols": {
+          "Czech": {
+            "kind": "predicate",
+            "meaning": "{0} is Czech",
+            "argument_roles": [
+              "person"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "provenance": [
+              "Premise 1"
+            ]
+          },
+          "Book": {
+            "kind": "predicate",
+            "meaning": "{0} is a book",
+            "argument_roles": [
+              "work"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "provenance": [
+              "Premise 4"
+            ]
+          },
+          "Author": {
+            "kind": "predicate",
+            "meaning": "{0} authored {1}",
+            "argument_roles": [
+              "author",
+              "work"
+            ],
+            "arg_sorts": [
+              "Entity",
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "provenance": [
+              "Premise 4"
+            ]
+          },
+          "PublishedIn": {
+            "kind": "predicate",
+            "meaning": "{0} was published in {1}",
+            "argument_roles": [
+              "work",
+              "year"
+            ],
+            "arg_sorts": [
+              "Entity",
+              "IntSort()"
+            ],
+            "return_sort": "BoolSort()",
+            "provenance": [
+              "Premise 4"
+            ]
+          }
+        },
+        "entities": {
+          "MiroslavVenhoda": {
+            "meaning": "MiroslavVenhoda",
+            "sort": "Entity",
+            "provenance": [
+              "Premise 1",
+              "Premise 4"
+            ]
+          },
+          "RenaissanceMusic": {
+            "meaning": "RenaissanceMusic",
+            "sort": "Entity",
+            "provenance": [
+              "Premise 1"
+            ]
+          },
+          "BaroqueMusic": {
+            "meaning": "BaroqueMusic",
+            "sort": "Entity",
+            "provenance": [
+              "Premise 1"
+            ]
+          },
+          "MethodOfStudyingGregorianChant": {
+            "meaning": "MethodOfStudyingGregorianChant",
+            "sort": "Entity",
+            "provenance": [
+              "Premise 4"
+            ]
+          }
+        },
+        "atomics": [],
+        "chunks": [],
+        "aliases": [],
+        "links": [],
+        "sources": []
+      },
+      "feedback": null
+    },
+    "output": {
+      "fol": "exists x (exists b (Czech(x) and Book(b) and Author(x, b) and PublishedIn(b, 1946)))",
+      "declarations": {
+        "symbols": {
+          "Czech": {
+            "kind": "predicate",
+            "meaning": "{0} is Czech",
+            "argument_roles": [
+              "person"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()"
+          },
+          "Book": {
+            "kind": "predicate",
+            "meaning": "{0} is a book",
+            "argument_roles": [
+              "work"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()"
+          },
+          "Author": {
+            "kind": "predicate",
+            "meaning": "{0} authored {1}",
+            "argument_roles": [
+              "author",
+              "work"
+            ],
+            "arg_sorts": [
+              "Entity",
+              "Entity"
+            ],
+            "return_sort": "BoolSort()"
+          },
+          "PublishedIn": {
+            "kind": "predicate",
+            "meaning": "{0} was published in {1}",
+            "argument_roles": [
+              "work",
+              "year"
+            ],
+            "arg_sorts": [
+              "Entity",
+              "IntSort()"
+            ],
+            "return_sort": "BoolSort()"
+          }
+        },
+        "entities": {}
+      }
+    }
+  },
+  {
+    "source": {
+      "dataset_index": 8,
+      "story_id": 463,
+      "example_id": 1342,
+      "premise_index": 5
+    },
+    "input": {
+      "sentence": "If a sea eel is either an eel or a plant, then a sea eel is an eel or an animal.",
+      "label": "Premise 6",
+      "global_analysis": {
+        "domain_plan": {
+          "mode": "mixed",
+          "category": "entity",
+          "evidence": [
+            "All eels are fish. "
+          ],
+          "reason": "Use one consistent subject domain; preserve substantive restrictions in mixed discourse."
+        },
+        "quantifier_plan": [
+          {
+            "label": "Premise 6",
+            "evidence": [
+              "If a sea eel is either an eel or a plant, then a sea eel is an eel or an animal."
+            ],
+            "interpretation": "designated",
+            "reason": "Read article together with story context and explicit quantifier."
+          }
+        ],
+        "predicate_alignments": []
+      },
+      "registry": {
+        "symbols": {
+          "Eel": {
+            "kind": "predicate",
+            "meaning": "{0} is an eel",
+            "argument_roles": [
+              "thing"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "provenance": [
+              "Premise 1"
+            ]
+          },
+          "Plant": {
+            "kind": "predicate",
+            "meaning": "{0} is a plant",
+            "argument_roles": [
+              "thing"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "provenance": [
+              "Premise 2",
+              "Premise 3"
+            ]
+          },
+          "Animal": {
+            "kind": "predicate",
+            "meaning": "{0} is an animal",
+            "argument_roles": [
+              "thing"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "provenance": [
+              "Premise 3",
+              "Premise 5"
+            ]
+          }
+        },
+        "entities": {},
+        "atomics": [],
+        "chunks": [],
+        "aliases": [],
+        "links": [],
+        "sources": []
+      },
+      "feedback": null
+    },
+    "output": {
+      "fol": "(Eel(SeaEel) xor Plant(SeaEel)) -> (Eel(SeaEel) or Animal(SeaEel))",
+      "declarations": {
+        "symbols": {
+          "Eel": {
+            "kind": "predicate",
+            "meaning": "{0} is an eel",
+            "argument_roles": [
+              "thing"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()"
+          },
+          "Plant": {
+            "kind": "predicate",
+            "meaning": "{0} is a plant",
+            "argument_roles": [
+              "thing"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()"
+          },
+          "Animal": {
+            "kind": "predicate",
+            "meaning": "{0} is an animal",
+            "argument_roles": [
+              "thing"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()"
+          }
+        },
+        "entities": {
+          "SeaEel": {
+            "meaning": "SeaEel",
+            "sort": "Entity"
+          }
+        }
+      }
+    }
+  },
+  {
+    "source": {
+      "dataset_index": 10,
+      "story_id": 133,
+      "example_id": 393,
+      "premise_index": 2
+    },
+    "input": {
+      "sentence": "The Emmet Building is a five-story building in Portland, Oregon.",
+      "label": "Premise 3",
+      "global_analysis": {
+        "domain_plan": {
+          "mode": "mixed",
+          "category": "entity",
+          "evidence": [
+            "The Blake McFall Company Building is a commercial warehouse listed on the National Register of Historic Places."
+          ],
+          "reason": "Use one consistent subject domain; preserve substantive restrictions in mixed discourse."
+        },
+        "quantifier_plan": [
+          {
+            "label": "Premise 3",
+            "evidence": [
+              "The Emmet Building is a five-story building in Portland, Oregon."
+            ],
+            "interpretation": "designated",
+            "reason": "Read article together with story context and explicit quantifier."
+          }
+        ],
+        "predicate_alignments": [
+          {
+            "mentions": [
+              "was built in 1915",
+              "is built in 1915"
+            ],
+            "canonical_meaning": "BuiltIn",
+            "relation": "same_meaning",
+            "evidence": [
+              "The Emmet Building was built in 1915.",
+              "A five-story building is built in 1915."
+            ]
+          }
+        ]
+      },
+      "registry": {
+        "symbols": {},
+        "entities": {
+          "BlakeMcFallCompanyBuilding": {
+            "meaning": "BlakeMcFallCompanyBuilding",
+            "sort": "Entity",
+            "provenance": [
+              "Premise 1",
+              "Premise 2"
+            ]
+          },
+          "NationalRegisterOfHistoricPlaces": {
+            "meaning": "NationalRegisterOfHistoricPlaces",
+            "sort": "Entity",
+            "provenance": [
+              "Premise 1",
+              "Premise 2"
+            ]
+          }
+        },
+        "atomics": [],
+        "chunks": [],
+        "aliases": [],
+        "links": [],
+        "sources": []
+      },
+      "feedback": null
+    },
+    "output": {
+      "fol": "Building(EmmetBuilding) and HasStoreys(EmmetBuilding, 5) and LocatedIn(EmmetBuilding, Portland) and LocatedIn(Portland, Oregon)",
+      "declarations": {
+        "symbols": {
+          "Building": {
+            "kind": "predicate",
+            "meaning": "{0} is a building",
+            "argument_roles": [
+              "building"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()"
+          },
+          "HasStoreys": {
+            "kind": "predicate",
+            "meaning": "{0} has {1} storeys",
+            "argument_roles": [
+              "building",
+              "count"
+            ],
+            "arg_sorts": [
+              "Entity",
+              "IntSort()"
+            ],
+            "return_sort": "BoolSort()"
+          },
+          "LocatedIn": {
+            "kind": "predicate",
+            "meaning": "{0} is located in {1}",
+            "argument_roles": [
+              "located_entity",
+              "location"
+            ],
+            "arg_sorts": [
+              "Entity",
+              "Entity"
+            ],
+            "return_sort": "BoolSort()"
+          }
+        },
+        "entities": {
+          "EmmetBuilding": {
+            "meaning": "EmmetBuilding",
+            "sort": "Entity"
+          },
+          "Portland": {
+            "meaning": "Portland",
+            "sort": "Entity"
+          },
+          "Oregon": {
+            "meaning": "Oregon",
+            "sort": "Entity"
+          }
+        }
+      }
+    }
+  },
+  {
+    "source": {
+      "kind": "synthetic",
+      "synthetic_id": "generic_vs_existential",
+      "dataset_index": "synthetic:generic_vs_existential"
+    },
+    "input": {
+      "sentence": "A patient with a fever needs rest.",
+      "label": "Conclusion",
+      "problem_context": {
+        "premises": [
+          "A patient with a fever needs rest.",
+          "Some patients have a fever.",
+          "A desk is in the clinic."
+        ],
+        "question": "A patient with a fever needs rest."
+      },
+      "global_analysis": {
+        "domain_plan": {
+          "mode": "mixed",
+          "category": "entity",
+          "evidence": [
+            "A patient with a fever needs rest."
+          ],
+          "reason": "Use one consistent subject domain; preserve substantive restrictions in mixed discourse."
+        },
+        "quantifier_plan": [
+          {
+            "label": "Conclusion",
+            "evidence": [
+              "A patient with a fever needs rest."
+            ],
+            "interpretation": "generic",
+            "reason": "Keep query scope and the same source-grounded referent."
+          }
+        ],
+        "coreference": [],
+        "discourse_referents": []
+      },
+      "registry": {
+        "symbols": {
+          "Patient": {
+            "kind": "predicate",
+            "meaning": "{0} is a patient",
+            "argument_roles": [
+              "entity"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "provenance": [
+              "Premise 1",
+              "Premise 2"
+            ]
+          },
+          "Fever": {
+            "kind": "predicate",
+            "meaning": "{0} has a fever",
+            "argument_roles": [
+              "entity"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "provenance": [
+              "Premise 1",
+              "Premise 2"
+            ]
+          },
+          "NeedsRest": {
+            "kind": "predicate",
+            "meaning": "{0} needs rest",
+            "argument_roles": [
+              "entity"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "provenance": [
+              "Premise 1"
+            ]
+          }
+        },
+        "entities": {},
+        "atomics": [],
+        "chunks": [],
+        "aliases": [],
+        "links": [],
+        "sources": []
+      },
+      "feedback": {
+        "previous_fol": "exists x (Patient(x) and Fever(x) and NeedsRest(x))",
+        "issues": [
+          "The repeated generic class rule says every patient with a fever needs rest, not that some such patient exists."
+        ],
+        "repair_instruction": "Repair the stated semantic error; preserve complete roles and query scope. Candidate not committed."
+      }
+    },
+    "output": {
+      "fol": "forall x ((Patient(x) and Fever(x)) -> NeedsRest(x))",
+      "declarations": {
+        "symbols": {
+          "Patient": {
+            "kind": "predicate",
+            "meaning": "{0} is a patient",
+            "argument_roles": [
+              "entity"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()"
+          },
+          "Fever": {
+            "kind": "predicate",
+            "meaning": "{0} has a fever",
+            "argument_roles": [
+              "entity"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()"
+          },
+          "NeedsRest": {
+            "kind": "predicate",
+            "meaning": "{0} needs rest",
+            "argument_roles": [
+              "entity"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()"
+          }
+        },
+        "entities": {}
+      }
+    }
+  },
+  {
+    "source": {
+      "kind": "synthetic",
+      "synthetic_id": "designated_adviser",
+      "dataset_index": "synthetic:designated_adviser"
+    },
+    "input": {
+      "sentence": "Orin's adviser is patient.",
+      "label": "Conclusion",
+      "problem_context": {
+        "premises": [
+          "Orin consults his adviser.",
+          "His adviser is patient."
+        ],
+        "question": "Orin's adviser is patient."
+      },
+      "global_analysis": {
+        "domain_plan": {
+          "mode": "mixed",
+          "category": "entity",
+          "evidence": [
+            "Orin consults his adviser."
+          ],
+          "reason": "Use one consistent subject domain; preserve substantive restrictions in mixed discourse."
+        },
+        "quantifier_plan": [
+          {
+            "label": "Conclusion",
+            "evidence": [
+              "Orin's adviser is patient."
+            ],
+            "interpretation": "designated",
+            "reason": "Keep query scope and the same source-grounded referent."
+          }
+        ],
+        "coreference": [
+          {
+            "mentions": [
+              "his adviser",
+              "Orin's adviser"
+            ],
+            "entity": "OrinsAdviser",
+            "evidence": [
+              "Orin consults his adviser.",
+              "His adviser is patient.",
+              "Orin's adviser is patient."
+            ]
+          }
+        ],
+        "discourse_referents": [
+          {
+            "description": "Orin's adviser",
+            "representation": "designated_individual",
+            "evidence": [
+              "Orin consults his adviser.",
+              "His adviser is patient.",
+              "Orin's adviser is patient."
+            ],
+            "reason": "One definite anaphoric referent, not all possible advisers."
+          }
+        ]
+      },
+      "registry": {
+        "symbols": {
+          "Patient": {
+            "kind": "predicate",
+            "meaning": "{0} is patient",
+            "argument_roles": [
+              "person"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "provenance": [
+              "Premise 2"
+            ]
+          }
+        },
+        "entities": {
+          "Orin": {
+            "meaning": "Orin",
+            "sort": "Entity",
+            "provenance": [
+              "Premise 1"
+            ]
+          },
+          "OrinsAdviser": {
+            "meaning": "the same adviser of Orin referred to as his adviser",
+            "sort": "Entity",
+            "provenance": [
+              "Premise 1",
+              "Premise 2"
+            ]
+          }
+        },
+        "atomics": [],
+        "chunks": [],
+        "aliases": [],
+        "links": [],
+        "sources": []
+      },
+      "feedback": {
+        "previous_fol": "forall x (AdviserOf(x, Orin) -> Patient(x))",
+        "issues": [
+          "The source describes the designated adviser; the candidate generalizes to all advisers related by a new predicate."
+        ],
+        "repair_instruction": "Repair the stated semantic error; preserve complete roles and query scope. Candidate not committed."
+      }
+    },
+    "output": {
+      "fol": "Patient(OrinsAdviser)",
+      "declarations": {
+        "symbols": {
+          "Patient": {
+            "kind": "predicate",
+            "meaning": "{0} is patient",
+            "argument_roles": [
+              "person"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()"
+          }
+        },
+        "entities": {
+          "OrinsAdviser": {
+            "meaning": "the same adviser of Orin referred to as his adviser",
+            "sort": "Entity"
+          }
+        }
+      }
+    }
+  },
+  {
+    "source": {
+      "kind": "synthetic",
+      "synthetic_id": "class_not_constant",
+      "dataset_index": "synthetic:class_not_constant"
+    },
+    "input": {
+      "sentence": "Aster is not used to index Delta.",
+      "label": "Conclusion",
+      "problem_context": {
+        "premises": [
+          "All archive algorithms are indexing algorithms.",
+          "Archive algorithms are not used to index Delta.",
+          "Aster is an archive algorithm."
+        ],
+        "question": "Aster is not used to index Delta."
+      },
+      "global_analysis": {
+        "domain_plan": {
+          "mode": "mixed",
+          "category": "entity",
+          "evidence": [
+            "All archive algorithms are indexing algorithms."
+          ],
+          "reason": "Use one consistent subject domain; preserve substantive restrictions in mixed discourse."
+        },
+        "quantifier_plan": [
+          {
+            "label": "Conclusion",
+            "evidence": [
+              "Aster is not used to index Delta."
+            ],
+            "interpretation": "designated",
+            "reason": "Keep query scope and the same source-grounded referent."
+          }
+        ],
+        "coreference": [],
+        "discourse_referents": []
+      },
+      "registry": {
+        "symbols": {
+          "UsedToIndex": {
+            "kind": "predicate",
+            "meaning": "{0} is used to index {1}",
+            "argument_roles": [
+              "algorithm",
+              "document"
+            ],
+            "arg_sorts": [
+              "Entity",
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "provenance": [
+              "Premise 2"
+            ]
+          }
+        },
+        "entities": {
+          "Delta": {
+            "meaning": "the document Delta",
+            "sort": "Entity",
+            "provenance": [
+              "Premise 2"
+            ]
+          },
+          "Aster": {
+            "meaning": "the named algorithm Aster",
+            "sort": "Entity",
+            "provenance": [
+              "Premise 3"
+            ]
+          }
+        },
+        "atomics": [],
+        "chunks": [],
+        "aliases": [],
+        "links": [],
+        "sources": []
+      },
+      "feedback": {
+        "previous_fol": "not UsedToIndex(ArchiveAlgorithmInstance, Delta)",
+        "issues": [
+          "The source names Aster; a fresh constant representing the archive-algorithm class does not denote Aster."
+        ],
+        "repair_instruction": "Repair the stated semantic error; preserve complete roles and query scope. Candidate not committed."
+      }
+    },
+    "output": {
+      "fol": "not UsedToIndex(Aster, Delta)",
+      "declarations": {
+        "symbols": {
+          "UsedToIndex": {
+            "kind": "predicate",
+            "meaning": "{0} is used to index {1}",
+            "argument_roles": [
+              "algorithm",
+              "document"
+            ],
+            "arg_sorts": [
+              "Entity",
+              "Entity"
+            ],
+            "return_sort": "BoolSort()"
+          }
+        },
+        "entities": {
+          "Aster": {
+            "meaning": "the named algorithm Aster",
+            "sort": "Entity"
+          },
+          "Delta": {
+            "meaning": "the document Delta",
+            "sort": "Entity"
+          }
+        }
+      }
+    }
+  },
+  {
+    "source": {
+      "kind": "synthetic",
+      "synthetic_id": "location_and_roles",
+      "dataset_index": "synthetic:location_and_roles"
+    },
+    "input": {
+      "sentence": "Jun is permitted to move into Harbor House with Pip.",
+      "label": "Conclusion",
+      "problem_context": {
+        "premises": [
+          "All buildings allowing pets permit residents to move in with their pets.",
+          "Jun is a resident and Pip is a pet owned by Jun.",
+          "Harbor House is a building that allows pets."
+        ],
+        "question": "Jun is permitted to move into Harbor House with Pip."
+      },
+      "global_analysis": {
+        "domain_plan": {
+          "mode": "mixed",
+          "category": "entity",
+          "evidence": [
+            "All buildings allowing pets permit residents to move in with their pets."
+          ],
+          "reason": "Use one consistent subject domain; preserve substantive restrictions in mixed discourse."
+        },
+        "quantifier_plan": [
+          {
+            "label": "Conclusion",
+            "evidence": [
+              "Jun is permitted to move into Harbor House with Pip."
+            ],
+            "interpretation": "designated",
+            "reason": "Keep query scope and the same source-grounded referent."
+          }
+        ],
+        "coreference": [],
+        "discourse_referents": []
+      },
+      "registry": {
+        "symbols": {
+          "PermittedMoveIn": {
+            "kind": "predicate",
+            "meaning": "{0} is permitted to move into {1} with {2}",
+            "argument_roles": [
+              "person",
+              "building",
+              "pet"
+            ],
+            "arg_sorts": [
+              "Entity",
+              "Entity",
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "provenance": [
+              "Premise 1"
+            ]
+          }
+        },
+        "entities": {
+          "Jun": {
+            "meaning": "Jun",
+            "sort": "Entity",
+            "provenance": [
+              "Premise 2"
+            ]
+          },
+          "Pip": {
+            "meaning": "Pip",
+            "sort": "Entity",
+            "provenance": [
+              "Premise 2"
+            ]
+          },
+          "HarborHouse": {
+            "meaning": "Harbor House",
+            "sort": "Entity",
+            "provenance": [
+              "Premise 3"
+            ]
+          }
+        },
+        "atomics": [],
+        "chunks": [],
+        "aliases": [],
+        "links": [],
+        "sources": []
+      },
+      "feedback": {
+        "previous_fol": "PermittedMoveIn(Jun, Pip, HarborHouse)",
+        "issues": [
+          "Building and pet roles are swapped. Repair must retain all three roles, not drop the location to satisfy an old arity."
+        ],
+        "repair_instruction": "Repair the stated semantic error; preserve complete roles and query scope. Candidate not committed."
+      }
+    },
+    "output": {
+      "fol": "PermittedMoveIn(Jun, HarborHouse, Pip)",
+      "declarations": {
+        "symbols": {
+          "PermittedMoveIn": {
+            "kind": "predicate",
+            "meaning": "{0} is permitted to move into {1} with {2}",
+            "argument_roles": [
+              "person",
+              "building",
+              "pet"
+            ],
+            "arg_sorts": [
+              "Entity",
+              "Entity",
+              "Entity"
+            ],
+            "return_sort": "BoolSort()"
+          }
+        },
+        "entities": {
+          "Jun": {
+            "meaning": "Jun",
+            "sort": "Entity"
+          },
+          "Pip": {
+            "meaning": "Pip",
+            "sort": "Entity"
+          },
+          "HarborHouse": {
+            "meaning": "Harbor House",
+            "sort": "Entity"
+          }
+        }
+      }
+    }
+  },
+  {
+    "source": {
+      "kind": "synthetic",
+      "synthetic_id": "classes_can_overlap",
+      "dataset_index": "synthetic:classes_can_overlap"
+    },
+    "input": {
+      "sentence": "Tavi is a sparrow.",
+      "label": "Conclusion",
+      "problem_context": {
+        "premises": [
+          "All finches are birds.",
+          "All sparrows are birds.",
+          "Tavi is a finch."
+        ],
+        "question": "Tavi is a sparrow."
+      },
+      "global_analysis": {
+        "domain_plan": {
+          "mode": "mixed",
+          "category": "entity",
+          "evidence": [
+            "All finches are birds."
+          ],
+          "reason": "Use one consistent subject domain; preserve substantive restrictions in mixed discourse."
+        },
+        "quantifier_plan": [
+          {
+            "label": "Conclusion",
+            "evidence": [
+              "Tavi is a sparrow."
+            ],
+            "interpretation": "designated",
+            "reason": "Keep query scope and the same source-grounded referent."
+          }
+        ],
+        "coreference": [],
+        "discourse_referents": []
+      },
+      "registry": {
+        "symbols": {
+          "Sparrow": {
+            "kind": "predicate",
+            "meaning": "{0} is a sparrow",
+            "argument_roles": [
+              "animal"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()",
+            "provenance": [
+              "Premise 2"
+            ]
+          }
+        },
+        "entities": {
+          "Tavi": {
+            "meaning": "Tavi",
+            "sort": "Entity",
+            "provenance": [
+              "Premise 3"
+            ]
+          }
+        },
+        "atomics": [],
+        "chunks": [],
+        "aliases": [],
+        "links": [],
+        "sources": []
+      },
+      "feedback": {
+        "previous_fol": "not Sparrow(Tavi)",
+        "issues": [
+          "The query is positive. Do not negate it or add exclusivity/disjointness from real-world taxonomy; no such premise is supplied."
+        ],
+        "repair_instruction": "Repair the stated semantic error; preserve complete roles and query scope. Candidate not committed."
+      }
+    },
+    "output": {
+      "fol": "Sparrow(Tavi)",
+      "declarations": {
+        "symbols": {
+          "Sparrow": {
+            "kind": "predicate",
+            "meaning": "{0} is a sparrow",
+            "argument_roles": [
+              "animal"
+            ],
+            "arg_sorts": [
+              "Entity"
+            ],
+            "return_sort": "BoolSort()"
+          }
+        },
+        "entities": {
+          "Tavi": {
+            "meaning": "Tavi",
+            "sort": "Entity"
+          }
+        }
+      }
+    }
+  }
+]

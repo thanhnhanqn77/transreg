@@ -1,0 +1,59 @@
+[
+  {
+    "dataset_index": 0,
+    "premises": [
+      "All people who regularly drink coffee are dependent on caffeine.",
+      "People either regularly drink coffee or joke about being addicted to caffeine.",
+      "No one who jokes about being addicted to caffeine is unaware that caffeine is a drug.",
+      "Rina is either a student and unaware that caffeine is a drug, or neither a student nor unaware that caffeine is a drug.",
+      "If Rina is not a person dependent on caffeine and a student, then Rina is either a person dependent on caffeine and a student, or neither a person dependent on caffeine nor a student. "
+    ],
+    "conclusion": "Rina is a person who jokes about being addicted to caffeine or unaware that caffeine is a drug."
+  },
+  {
+    "dataset_index": 5,
+    "premises": [
+      "Miroslav Venhoda was a Czech choral conductor who specialized in the performance of Renaissance and Baroque music.",
+      "Any choral conductor is a musician.",
+      "Some musicians love music.",
+      "Miroslav Venhoda published a book in 1946 called Method of Studying Gregorian Chant."
+    ],
+    "conclusion": "A Czech person wrote a book in 1946."
+  },
+  {
+    "dataset_index": 8,
+    "premises": [
+      "All eels are fish. ",
+      "No fish are plants. ",
+      "A thing is either a plant or animal.",
+      "Nothing that breathes is paper. ",
+      "All animals breathe.",
+      "If a sea eel is either an eel or a plant, then a sea eel is an eel or an animal."
+    ],
+    "conclusion": "Sea eel is a paper."
+  },
+  {
+    "dataset_index": 10,
+    "premises": [
+      "The Blake McFall Company Building is a commercial warehouse listed on the National Register of Historic Places.",
+      "The Blake McFall Company Building was added to the National Register of Historic Places in 1990.",
+      "The Emmet Building is a five-story building in Portland, Oregon.",
+      "The Emmet Building was built in 1915.",
+      "The Emmet Building is another name for the Blake McFall Company Building.",
+      "John works at the Emmet Building."
+    ],
+    "conclusion": "A five-story building is built in 1915."
+  },
+  {
+    "dataset_index": 20,
+    "premises": [
+      "All customers who are subscribed to AMC List are available to watch 3 movies every week without any additional fees.",
+      "Some customers go to cinemas every week",
+      "Customers either subscribe to AMC service or HBO service.",
+      "Customers who prefer TV series more and will not watch TV series in cinemas.",
+      "All customers who subscribe to HBO services prefer TV series to movies.",
+      "James watches TV series in cinemas."
+    ],
+    "conclusion": "James goes to cinemas every week or watches 3 movies every week without any additional fees."
+  }
+]

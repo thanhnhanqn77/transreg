@@ -1,0 +1,128 @@
+Create ONE initial connected NL-to-FOL proposal for the whole current problem.
+Before generating entries, apply alignment_plan and the global quantifier_plan.
+Choose one canonical relation for inverse phrasings and apply its ordered roles
+everywhere. Jointly check types and event/location decomposition in premises and
+query. Independent sentence correctness is insufficient if paraphrases become
+unrelated symbols. Preserve truly new query restrictions without inventing facts.
+No proof, derived facts, predicted answer, gold label or reference FOL is given
+or requested. Preserve the order and content of every source sentence.
+
+Return ONLY JSON:
+{"premises":[{"fol":"...","declarations":{"symbols":{},"entities":{}}}],
+ "conclusion":{"fol":"...","declarations":{"symbols":{},"entities":{}}}}
+The premises array length MUST equal problem_context.premises length. Each entry
+translates exactly that source sentence. The conclusion is a proposition to
+test, never an additional premise. Use the same declarations format as CLOVER:
+symbols have kind predicate/function, meaning, ordered argument_roles,
+arg_sorts and return_sort; entities have meaning and sort. Describe exactly the
+symbols/constants used by each entry, including reused symbols.
+
+Valid sorts: Entity, IntSort(), RealSort(), StringSort(), BoolSort() (return only).
+Semantic categories Season, Office, Person, Monitor use Entity as carrier sort;
+their meanings belong in argument roles and domain_plan, not invented Z3 sorts.
+Use descriptive CamelCase symbols and constants, single lowercase variables,
+infix forall/exists, and/or/xor/not/->/<->, =/!=/>/</>=/<=. Parenthesize scope.
+
+Plan and apply signatures to ALL entries together. Do not invent a local
+predicate with a different time/place suffix when it repeats the same relation.
+For event-specific comparisons use the same numeric function and event argument
+in generic rules, numeric facts and the conclusion. Use RealSort() and decimal
+literals for scores. Keep explicitly stated dates and event identifiers.
+
+For a positive qualified assertion, preserve both its core and qualification
+when generic rules use the core. A dated guilty fact can be
+Guilty(person) and GuiltyInYear(person,year); a negative dated fact does not
+license not Guilty(person). Do not treat a Year(year) atom alone as an event date.
+
+For office suspension, the generic "their office" and a later specific office
+must use the SAME relation. If the question names the office, plan the office
+argument at the start: HoldsOffice(p,o), SuspendedFromOffice(p,o), and a rule
+forall p forall o ((Legislator(p) and Guilty(p) and HoldsOffice(p,o)) ->
+SuspendedFromOffice(p,o)). The biographical membership sentence supplies the
+source-grounded HoldsOffice fact. Do not choose an arbitrary existential office
+that is not linked to the person's actual office. Do not assert suspension or
+guilt unless stated by the source; the rule still performs that inference later.
+
+Use domain_plan consistently in every entry. A homogeneous categorical puzzle
+whose discourse consists of monitors uses a monitor discourse universe for x:
+do not add an uninterpreted Monitor guard to only some of its rules. A mixed
+domain retains genuine class restrictions. Do not introduce unasserted type
+membership facts to repair mixed domains. "All monitors in the library" in
+the homogeneous monitor universe is forall x (InLibrary(x) -> ProducedByAOC(x)).
+The carrier name Entity does not expand that discourse universe.
+
+Resolve recurring indefinite subjects as the same designated discourse referent
+when the source context establishes it. Do not quantify a new unrelated person
+in the conclusion. Preserve genuine all/some/another quantifiers. Plain or and
+either ... or retain the shared FOLIO operator conventions.
+
+Use structural negation and all clauses of adjectival conjunctions. Keep
+canonical atom names concise and their glossary precise. Never output redundant
+proofs or a solved conclusion. Final check: every repeated relation has identical
+ordered roles/sorts, every date/place has its source meaning, and no query-only
+alias was created for an already used meaning.
+
+JOINT OUTPUT CONTRACT -- APPLIES TO THE ENTIRE RESPONSE
+Return one complete JSON object with exactly two top-level keys: "premises"
+and "conclusion". Do not output markdown fences, headings, commentary, proof,
+analysis, a second object, or any characters after the final closing brace.
+The first non-whitespace character is { and the last is }. All object keys
+and string values use JSON double quotes; escape any quote or backslash inside
+a string. Use no trailing commas. FOL is a JSON string, not executable code.
+
+Each premise and the conclusion is exactly an object with "fol" (a nonempty
+string) and "declarations" (an object with "symbols" and "entities"). Each
+symbol has "kind", "meaning", "argument_roles", "arg_sorts", "return_sort";
+each entity has "meaning" and "sort". Empty symbol/entity maps are {}.
+Do not add separate glossary sections, registry updates, explanations, or
+alternative translations. Declarations are local to each entry: repeat the
+same canonical signature when that symbol is reused in another entry.
+
+Apply the shared-glossary and scope conventions illustrated by SymbCoT, but
+serialize the result using ONLY the following JSON layout. This small fixed
+example illustrates serialization, not facts or symbols to copy into the task.
+Example input: premises ["All people who drink coffee depend on caffeine.",
+"Ada drinks coffee."], question "Ada depends on caffeine."
+Example output:
+{
+  "premises": [
+    {
+      "fol": "forall x (DrinksCoffee(x) -> DependsOnCaffeine(x))",
+      "declarations": {
+        "symbols": {
+          "DrinksCoffee": {"kind": "predicate", "meaning": "{0} drinks coffee", "argument_roles": ["person"], "arg_sorts": ["Entity"], "return_sort": "BoolSort()"},
+          "DependsOnCaffeine": {"kind": "predicate", "meaning": "{0} depends on caffeine", "argument_roles": ["person"], "arg_sorts": ["Entity"], "return_sort": "BoolSort()"}
+        },
+        "entities": {}
+      }
+    },
+    {
+      "fol": "DrinksCoffee(Ada)",
+      "declarations": {
+        "symbols": {
+          "DrinksCoffee": {"kind": "predicate", "meaning": "{0} drinks coffee", "argument_roles": ["person"], "arg_sorts": ["Entity"], "return_sort": "BoolSort()"}
+        },
+        "entities": {"Ada": {"meaning": "Ada", "sort": "Entity"}}
+      }
+    }
+  ],
+  "conclusion": {
+    "fol": "DependsOnCaffeine(Ada)",
+    "declarations": {
+      "symbols": {
+        "DependsOnCaffeine": {"kind": "predicate", "meaning": "{0} depends on caffeine", "argument_roles": ["person"], "arg_sorts": ["Entity"], "return_sort": "BoolSort()"}
+      },
+      "entities": {"Ada": {"meaning": "Ada", "sort": "Entity"}}
+    }
+  }
+}
+
+For the actual task, construct exactly one entry per problem_context.premises
+item in its original order and exactly one conclusion from
+problem_context.question. Global analysis and symbol plans are advisory:
+translate the actual source, never facts from demonstrations or inferred facts.
+Before emitting the response, check silently that every premise entry closes
+its entities map, declarations object, and entry object exactly once; only then
+close the premises array. A named entity entry has its own object to close.
+Count premise entries, check commas between entries, then close the conclusion
+and the top-level object. Stop immediately. Output only that JSON object.

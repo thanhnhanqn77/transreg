@@ -1,0 +1,42 @@
+Translate ONLY the current sentence into first-order logic following the FOLIO dataset structure and SymbCoT translation conventions. Use global_analysis as fallible guidance and the registry as naming context, never as extra facts. Preserve every clause, predicate meaning, identity, ordered argument role, scope, negation, implication direction, and/or/xor, equality, inequality and cardinality. Do not solve the question. Reuse accepted symbols when meanings agree; preserve their exact ordered role and sort signatures. Keep distinct relations distinct; do not force uncertain alignments. Incorporate retry feedback.
+
+FOLIO Translation Grammar and Operator Rules (SymbCoT / FOLIO conventions):
+1) Logical conjunction (and): (expr1 and expr2)
+2) Logical disjunction (or): (expr1 or expr2) [plain "or", "at least one of"]
+3) Logical exclusive disjunction (either ... or ...): (expr1 xor expr2) [canonical FOLIO "either ... or ..."]
+4) Logical negation (not): not expr1 ["not", "never"]. Lexical "unaware" may be its own property; preserve the registry's representation consistently, without silently changing it to a different predicate.
+5) Negation of disjunction (neither ... nor ...): not (expr1 or expr2) or (not expr1 and not expr2)
+6) Logical implication (if ... then ...): (expr1 -> expr2) ["if ... then ...", "all/every/each A is B" -> forall x (A(x) -> B(x))]
+7) Logical equivalence (if and only if): (expr1 <-> expr2)
+8) Universal quantification: forall x (...) ["all", "every", "each", "any", generic plural "People ..."]
+9) Existential quantification: exists x (...) ["some", "at least one", "there is"]. The article a/an alone does not determine scope: generic class rules and queries are universal, episodic introductions existential, recurring definite/anaphoric subjects preserve their referent under the shared policy.
+10) Negative quantification: "No A is B" / "No one who A is B" -> forall x (A(x) -> not B(x))
+11) Discourse domain: Phrases like "X is a person who P" or "is someone who P" describe the property P(X) of individual X (e.g., Jokes(Rina)) and do not introduce a separate Person(x) predicate. Generic plural subjects like "People P" denote universal generalization forall x P(x).
+
+Return ONLY JSON {"fol":"...","declarations":{"symbols":{"Researcher":{"kind":"predicate","meaning":"is a researcher","argument_roles":["researcher"],"arg_sorts":["Entity"],"return_sort":"BoolSort()"}},"entities":{"Alice":{"meaning":"Alice","sort":"Entity"}}}}.
+Declarations describe EXACTLY the symbols used by this sentence, including reused ones, and are provisional, not registry updates. Each function uses kind=function and a nonboolean return_sort. Supported sorts: Entity, IntSort(), RealSort(), StringSort(). Use descriptive CamelCase constants and single lowercase bound variables. Numeric and string literals are not entity declarations. No free variables.
+Use infix parser syntax: forall x (P(x) -> Q(x)), exists x (P(x) and Q(x)), not P(Alice), (P(Alice) or Q(Alice)), (P(Alice) xor Q(Alice)), (P(x) <-> Q(x)), =, !=, >, <, >=, <=. Parenthesize scope explicitly. Do NOT use Python/Z3 constructors such as And/ForAll or code fences. Encode cardinality with quantified distinct witnesses and an upper-bound universal clause where needed; do not introduce an unsupported Count operator. Avoid arbitrary sort coercions.
+FOLIO REPRESENTATION CONVENTIONS:
+- Do not automatically introduce a type predicate for generic domain nouns such as "people", "customers", "persons", etc. if the sentence is naturally quantified over that discourse class (e.g., "Customers either subscribe to AMC service or HBO service" -> forall x (SubscribedToAMC(x) xor SubscribedToHBO(x)), do NOT guard with Customer(x)).
+- Prefer canonical reusable semantic predicates over surface-form predicates. Keep predicates relational and consistent with previous premises.
+- When a meaning can be compositionally represented using existing predicates, reuse/decompose into those predicates instead of introducing a new monolithic predicate (e.g., reuse SuspendedFromOffice(x) rather than creating a new SuspendedFromBody(...)).
+- An asserted naming identity ("X is another name for Y") is logical equality: X = Y (e.g., EmmetBuilding = BlakeMcFallCompanyBuilding). Do NOT introduce an uninterpreted SameAs(X, Y) predicate.
+- Preserve the representation style used consistently across the current problem and the few-shot examples.
+- Do not add facts that are not stated or logically licensed.
+- Bound variables must be single lowercase letters from [a-z] (e.g. x, y, z, u, v, w, p, q). Never use multi-letter variables such as p1, p2, hp, or hq.
+
+Before answering, check every clause, balanced parentheses and valid JSON. Reuse
+the registry's relations for the SAME meaning in an existential question, keeping
+its variables existential rather than substituting named witnesses. Follow the
+shared personal-work, discourse-individual and negation-scope rules below. A
+question is translated as a proposition to test, never as an asserted new fact.
+
+MANDATORY SCOPE AND DOMAIN CHECK BEFORE RETURNING JSON:
+For "not a person P and a Q", first group the coordinated noun phrase as
+(P and Q), then negate that ENTIRE group: not (P and Q). Do not emit or accept
+(not P) and Q for this wording. That difference is a concrete policy violation,
+not hypothetical ambiguity. Apply this check inside implication antecedents too.
+For "a person who P", "a person P", and "People P", person is the discourse
+domain wording under this policy. Do not add Person as an independent conjunct
+or guard in this same human-domain problem, especially only in its question.
+The global analysis and accepted registry cannot override these scope rules.

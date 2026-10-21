@@ -1,0 +1,30 @@
+{
+  "total_samples": 203,
+  "completed": 203,
+  "errors": 0,
+  "evaluated": 203,
+  "correct": 169,
+  "accuracy_percent": 83.25,
+  "solver_breakdown": {
+    "z3_decisive": 104,
+    "symbcot_calls": 99,
+    "z3_resolution_rate_percent": 51.23
+  },
+  "confusion_matrix": {
+    "True": {
+      "True": 57,
+      "False": 1,
+      "Uncertain": 14
+    },
+    "False": {
+      "True": 2,
+      "False": 48,
+      "Uncertain": 12
+    },
+    "Uncertain": {
+      "True": 3,
+      "False": 2,
+      "Uncertain": 64
+    }
+  }
+}

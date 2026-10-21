@@ -1,0 +1,71 @@
+SYMB COT FOLIO TRANSLATION DEMONSTRATIONS
+Adapted from SymbCoT/prompts/FOLIO/translation.txt. These are separate fixed
+demonstration problems, not facts, schemas or answers for the current input.
+Use their representation conventions, not their constants or predicates.
+Continue returning the JSON schema of the current stage, not the original
+Predicates/Premises/Conclusion text format. Below, ASCII forall/exists,
+and/or/xor/not/-> are the parser-compatible spelling of the original operators.
+
+Example 1: shared predicates and logical scope.
+Glossary: Dependent(x): x depends on caffeine; Drinks(x): x regularly drinks
+coffee; Jokes(x): x jokes about being addicted to caffeine; Unaware(x): x is
+unaware caffeine is a drug; Student(x): x is a student.
+
+All people who regularly drink coffee are dependent on caffeine.
+  forall x (Drinks(x) -> Dependent(x))
+People either regularly drink coffee or joke about being addicted to caffeine.
+  forall x (Drinks(x) xor Jokes(x))
+No one who jokes about being addicted to caffeine is unaware that caffeine is a drug.
+  forall x (Jokes(x) -> not Unaware(x))
+Rina is either a student and unaware that caffeine is a drug, or neither a
+student nor unaware that caffeine is a drug.
+  ((Student(Rina) and Unaware(Rina)) xor not (Student(Rina) or Unaware(Rina)))
+If Rina is not a person dependent on caffeine and a student, then Rina is either
+a person dependent on caffeine and a student, or neither a person dependent on
+caffeine nor a student.
+  (not (Dependent(Rina) and Student(Rina)) ->
+    ((Dependent(Rina) and Student(Rina)) xor not (Dependent(Rina) or Student(Rina))))
+Query: Rina is either a person who jokes about being addicted to caffeine or
+is unaware that caffeine is a drug.
+  (Jokes(Rina) xor Unaware(Rina))
+Query: If Rina is either a person who jokes about being addicted to caffeine and
+a person who is unaware that caffeine is a drug, or neither a person who jokes
+about being addicted to caffeine nor a person who is unaware that caffeine is
+a drug, then Rina jokes about being addicted to caffeine and regularly drinks coffee.
+  (((Jokes(Rina) and Unaware(Rina)) xor not (Jokes(Rina) or Unaware(Rina))) ->
+    (Jokes(Rina) and Drinks(Rina)))
+
+Example 2: shared predicates across descriptive facts and questions.
+Miroslav Venhoda was a Czech choral conductor who specialized in the performance
+of Renaissance and Baroque music.
+  (Czech(Miroslav) and ChoralConductor(Miroslav) and
+   Specialize(Miroslav, Renaissance) and Specialize(Miroslav, Baroque))
+Any choral conductor is a musician.
+  forall x (ChoralConductor(x) -> Musician(x))
+Some musicians love music.
+  exists x (Musician(x) and Love(x, Music))
+Miroslav Venhoda published a book in 1946 called Method of Studying Gregorian Chant.
+  (Book(MethodOfStudyingGregorianChant) and
+   Author(Miroslav, MethodOfStudyingGregorianChant) and
+   Publish(MethodOfStudyingGregorianChant, Year1946))
+Query: Miroslav Venhoda loved music.
+  Love(Miroslav, Music)
+Query: A Czech person wrote a book in 1946.
+  exists y exists x (Czech(x) and Author(x, y) and Book(y) and Publish(y, Year1946))
+Query: No choral conductor specialized in the performance of Renaissance.
+  not (exists x (ChoralConductor(x) and Specialize(x, Renaissance)))
+
+Lessons demonstrated by the original prompt:
+- Select one precise glossary shared by premises and question. Do not create
+  disconnected predicates for the same meaning or reverse argument roles.
+- A generic people universe needs no extra Person guard in that universe.
+  Substantive restrictions such as Czech and ChoralConductor remain explicit.
+- Either ... or uses xor in this prompt; conjunction and neither retain their
+  full scope. The examples do not justify treating every plain or as xor.
+- Some musicians does not become every musician or Love(Miroslav, Music).
+  The question is only translated, never solved or asserted as a premise.
+- Dates, named works, nationality and both specialization fields are preserved.
+  Author/Publish reuse follows this personal-work example, not a general rule
+  equating any publisher or company with an author.
+- The examples give no license to discard an additional query qualifier such
+  as major, new or company, or to add a missing premise to obtain an answer.

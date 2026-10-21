@@ -1,0 +1,54 @@
+Compare original_sentence, generated FOL, declarations and literal back_translation for semantic equivalence UNDER THE CANONICAL FOLIO POLICY, not arbitrary model-theoretic domains.
+
+MANDATORY DOMAIN CONVENTION: In generic human statements, the discourse domain is
+people. The implementation sort named Entity is just an uninterpreted carrier;
+its name does NOT assert that nonpeople are quantified. "People P" and
+"forall x P(x)" agree under this convention. No Person(x) guard or Person(Rina)
+fact is required for generic "people", "person", "a person who". Even if a literal
+back-translation says "every entity", interpret it in the same discourse domain.
+Do NOT list absence of Person or use of Entity as an issue in these statements.
+This does not remove substantive restrictions such as Doctor(x) or Student(x).
+
+Calibration (apply the rule, do not invent an alternative reading):
+NL: People either regularly drink coffee or joke about caffeine.
+FOL: forall x (RegularlyDrinkCoffee(x) xor JokesAboutCaffeine(x))
+Glossary: the predicates mean regularly drinks coffee / jokes about caffeine.
+Verdict: equivalent=true, issues=[], suggested_corrections=[]. Exclusive OR (xor)
+for "either ... or ..." and universal human-domain quantification are canonical.
+A supposed missing Person guard or demanding inclusive OR are NOT reasons to reject this formula.
+
+Counterexample calibration:
+NL: Every doctor is a researcher.
+FOL: forall x (Researcher(x) -> Doctor(x))
+Verdict: equivalent=false. The direction is reversed. The correct direction is
+Doctor(x) -> Researcher(x). Never accept real errors just because another example
+was acceptable.
+
+Independently inspect FOL; a fluent back-translation is not proof. Check all clauses, scope, quantifiers, negation, implication direction, conjunction/disjunction, equality/inequality, cardinality, entity identity, predicate meanings and argument order. Check proposed meanings against source wording and accepted registry definitions. Registry entries are naming context, not added facts. Global analysis is fallible guidance: reject unsupported alignments. Do not solve the question or use desired answers. New meanings may introduce new symbols. Return ONLY JSON {"equivalent":true,"issues":[],"suggested_corrections":[]}. On any concrete mismatch use equivalent=false with specific issues and corrections.
+Apply the shared CANONICAL FOLIO INTERPRETATION POLICY below. Evaluate semantic correctness under the same FOLIO representation conventions used by the translator and few-shot demonstrations. Reject only concrete semantic mismatches under that policy, not speculative alternate readings. Do not reject a translation merely because another logically possible formalization exists (such as demanding a redundant x != y distinctness guard, or demanding numerical arithmetic instead of relational predicates, or demanding an extra domain guard like Customer(x) or Person(x), or rejecting a universal rule for relative clauses like "Customers who P and will not Q"). An otherwise faithful candidate must not fail merely because optional entity metadata, aliases, links, descriptions or provenance are absent or malformed. Evaluate the actual FOL meaning; registry annotations are auxiliary. Each reported issue must identify a specific source span and a conflicting formula clause/operator. Do not report uncertainty or an optional alternate phrasing as a semantic issue.
+
+The object being accepted is the FOL, not the prose quality of back_translation.
+If the back-translation alone is awkward or incorrect but the FOL faithfully
+matches the source under policy, return equivalent=true and issues=[]; you may
+record a prose-only clarification in suggested_corrections. Never request a FOL
+rewrite solely to repair that auxiliary prose. Inspect the actual operands:
+(A and B) or (not A and not B) has mutually exclusive branches; generic wording
+"possibly both" for inclusive OR is not a claim that these branches can coexist.
+Likewise reject actual extra conjuncts in FOL, not extra words found only in the
+back-translation. Preserve concrete checks for omitted Czech nationality,
+building location, dates, argument roles, direction and negation scope.
+Under the shared FOLIO personal-work convention, a named person's published book
+and their authored/written book must use the same Author/Book/PublishedIn relations.
+For recurring designated individuals, check premise/question identity rather
+than allowing an ungrounded class-to-constant switch. Do not repair these by
+inventing new facts, taxonomy memberships, or proof-oriented bridge axioms.
+
+MANDATORY SCOPE AND DOMAIN CHECK BEFORE RETURNING JSON:
+For "not a person P and a Q", first group the coordinated noun phrase as
+(P and Q), then negate that ENTIRE group: not (P and Q). Do not emit or accept
+(not P) and Q for this wording. That difference is a concrete policy violation,
+not hypothetical ambiguity. Apply this check inside implication antecedents too.
+For "a person who P", "a person P", and "People P", person is the discourse
+domain wording under this policy. Do not add Person as an independent conjunct
+or guard in this same human-domain problem, especially only in its question.
+The global analysis and accepted registry cannot override these scope rules.

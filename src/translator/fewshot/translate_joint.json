@@ -1,0 +1,758 @@
+[
+  {
+    "source": {
+      "kind": "synthetic",
+      "synthetic_id": "generic_vs_existential",
+      "dataset_index": "synthetic:generic_vs_existential"
+    },
+    "input": {
+      "problem_context": {
+        "premises": [
+          "A patient with a fever needs rest.",
+          "Some patients have a fever.",
+          "A desk is in the clinic."
+        ],
+        "question": "A patient with a fever needs rest."
+      }
+    },
+    "output": {
+      "premises": [
+        {
+          "fol": "forall x ((Patient(x) and Fever(x)) -> NeedsRest(x))",
+          "declarations": {
+            "symbols": {
+              "Patient": {
+                "kind": "predicate",
+                "meaning": "{0} is a patient",
+                "argument_roles": [
+                  "entity"
+                ],
+                "arg_sorts": [
+                  "Entity"
+                ],
+                "return_sort": "BoolSort()"
+              },
+              "Fever": {
+                "kind": "predicate",
+                "meaning": "{0} has a fever",
+                "argument_roles": [
+                  "entity"
+                ],
+                "arg_sorts": [
+                  "Entity"
+                ],
+                "return_sort": "BoolSort()"
+              },
+              "NeedsRest": {
+                "kind": "predicate",
+                "meaning": "{0} needs rest",
+                "argument_roles": [
+                  "entity"
+                ],
+                "arg_sorts": [
+                  "Entity"
+                ],
+                "return_sort": "BoolSort()"
+              }
+            },
+            "entities": {}
+          }
+        },
+        {
+          "fol": "exists x (Patient(x) and Fever(x))",
+          "declarations": {
+            "symbols": {
+              "Patient": {
+                "kind": "predicate",
+                "meaning": "{0} is a patient",
+                "argument_roles": [
+                  "entity"
+                ],
+                "arg_sorts": [
+                  "Entity"
+                ],
+                "return_sort": "BoolSort()"
+              },
+              "Fever": {
+                "kind": "predicate",
+                "meaning": "{0} has a fever",
+                "argument_roles": [
+                  "entity"
+                ],
+                "arg_sorts": [
+                  "Entity"
+                ],
+                "return_sort": "BoolSort()"
+              }
+            },
+            "entities": {}
+          }
+        },
+        {
+          "fol": "exists x (Desk(x) and InClinic(x))",
+          "declarations": {
+            "symbols": {
+              "Desk": {
+                "kind": "predicate",
+                "meaning": "{0} is a desk",
+                "argument_roles": [
+                  "entity"
+                ],
+                "arg_sorts": [
+                  "Entity"
+                ],
+                "return_sort": "BoolSort()"
+              },
+              "InClinic": {
+                "kind": "predicate",
+                "meaning": "{0} is in the clinic",
+                "argument_roles": [
+                  "entity"
+                ],
+                "arg_sorts": [
+                  "Entity"
+                ],
+                "return_sort": "BoolSort()"
+              }
+            },
+            "entities": {}
+          }
+        }
+      ],
+      "conclusion": {
+        "fol": "forall x ((Patient(x) and Fever(x)) -> NeedsRest(x))",
+        "declarations": {
+          "symbols": {
+            "Patient": {
+              "kind": "predicate",
+              "meaning": "{0} is a patient",
+              "argument_roles": [
+                "entity"
+              ],
+              "arg_sorts": [
+                "Entity"
+              ],
+              "return_sort": "BoolSort()"
+            },
+            "Fever": {
+              "kind": "predicate",
+              "meaning": "{0} has a fever",
+              "argument_roles": [
+                "entity"
+              ],
+              "arg_sorts": [
+                "Entity"
+              ],
+              "return_sort": "BoolSort()"
+            },
+            "NeedsRest": {
+              "kind": "predicate",
+              "meaning": "{0} needs rest",
+              "argument_roles": [
+                "entity"
+              ],
+              "arg_sorts": [
+                "Entity"
+              ],
+              "return_sort": "BoolSort()"
+            }
+          },
+          "entities": {}
+        }
+      }
+    }
+  },
+  {
+    "source": {
+      "kind": "synthetic",
+      "synthetic_id": "designated_adviser",
+      "dataset_index": "synthetic:designated_adviser"
+    },
+    "input": {
+      "problem_context": {
+        "premises": [
+          "Orin consults his adviser.",
+          "His adviser is patient."
+        ],
+        "question": "Orin's adviser is patient."
+      }
+    },
+    "output": {
+      "premises": [
+        {
+          "fol": "Consults(Orin, OrinsAdviser)",
+          "declarations": {
+            "symbols": {
+              "Consults": {
+                "kind": "predicate",
+                "meaning": "{0} consults {1}",
+                "argument_roles": [
+                  "person",
+                  "adviser"
+                ],
+                "arg_sorts": [
+                  "Entity",
+                  "Entity"
+                ],
+                "return_sort": "BoolSort()"
+              }
+            },
+            "entities": {
+              "Orin": {
+                "meaning": "Orin",
+                "sort": "Entity"
+              },
+              "OrinsAdviser": {
+                "meaning": "the same adviser of Orin referred to as his adviser",
+                "sort": "Entity"
+              }
+            }
+          }
+        },
+        {
+          "fol": "Patient(OrinsAdviser)",
+          "declarations": {
+            "symbols": {
+              "Patient": {
+                "kind": "predicate",
+                "meaning": "{0} is patient",
+                "argument_roles": [
+                  "person"
+                ],
+                "arg_sorts": [
+                  "Entity"
+                ],
+                "return_sort": "BoolSort()"
+              }
+            },
+            "entities": {
+              "OrinsAdviser": {
+                "meaning": "the same adviser of Orin referred to as his adviser",
+                "sort": "Entity"
+              }
+            }
+          }
+        }
+      ],
+      "conclusion": {
+        "fol": "Patient(OrinsAdviser)",
+        "declarations": {
+          "symbols": {
+            "Patient": {
+              "kind": "predicate",
+              "meaning": "{0} is patient",
+              "argument_roles": [
+                "person"
+              ],
+              "arg_sorts": [
+                "Entity"
+              ],
+              "return_sort": "BoolSort()"
+            }
+          },
+          "entities": {
+            "OrinsAdviser": {
+              "meaning": "the same adviser of Orin referred to as his adviser",
+              "sort": "Entity"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "source": {
+      "kind": "synthetic",
+      "synthetic_id": "class_not_constant",
+      "dataset_index": "synthetic:class_not_constant"
+    },
+    "input": {
+      "problem_context": {
+        "premises": [
+          "All archive algorithms are indexing algorithms.",
+          "Archive algorithms are not used to index Delta.",
+          "Aster is an archive algorithm."
+        ],
+        "question": "Aster is not used to index Delta."
+      }
+    },
+    "output": {
+      "premises": [
+        {
+          "fol": "forall x (ArchiveAlgorithm(x) -> IndexingAlgorithm(x))",
+          "declarations": {
+            "symbols": {
+              "ArchiveAlgorithm": {
+                "kind": "predicate",
+                "meaning": "{0} is an archive algorithm",
+                "argument_roles": [
+                  "algorithm"
+                ],
+                "arg_sorts": [
+                  "Entity"
+                ],
+                "return_sort": "BoolSort()"
+              },
+              "IndexingAlgorithm": {
+                "kind": "predicate",
+                "meaning": "{0} is an indexing algorithm",
+                "argument_roles": [
+                  "algorithm"
+                ],
+                "arg_sorts": [
+                  "Entity"
+                ],
+                "return_sort": "BoolSort()"
+              }
+            },
+            "entities": {}
+          }
+        },
+        {
+          "fol": "forall x (ArchiveAlgorithm(x) -> not UsedToIndex(x, Delta))",
+          "declarations": {
+            "symbols": {
+              "ArchiveAlgorithm": {
+                "kind": "predicate",
+                "meaning": "{0} is an archive algorithm",
+                "argument_roles": [
+                  "algorithm"
+                ],
+                "arg_sorts": [
+                  "Entity"
+                ],
+                "return_sort": "BoolSort()"
+              },
+              "UsedToIndex": {
+                "kind": "predicate",
+                "meaning": "{0} is used to index {1}",
+                "argument_roles": [
+                  "algorithm",
+                  "document"
+                ],
+                "arg_sorts": [
+                  "Entity",
+                  "Entity"
+                ],
+                "return_sort": "BoolSort()"
+              }
+            },
+            "entities": {
+              "Delta": {
+                "meaning": "the document Delta",
+                "sort": "Entity"
+              }
+            }
+          }
+        },
+        {
+          "fol": "ArchiveAlgorithm(Aster)",
+          "declarations": {
+            "symbols": {
+              "ArchiveAlgorithm": {
+                "kind": "predicate",
+                "meaning": "{0} is an archive algorithm",
+                "argument_roles": [
+                  "algorithm"
+                ],
+                "arg_sorts": [
+                  "Entity"
+                ],
+                "return_sort": "BoolSort()"
+              }
+            },
+            "entities": {
+              "Aster": {
+                "meaning": "the named algorithm Aster",
+                "sort": "Entity"
+              }
+            }
+          }
+        }
+      ],
+      "conclusion": {
+        "fol": "not UsedToIndex(Aster, Delta)",
+        "declarations": {
+          "symbols": {
+            "UsedToIndex": {
+              "kind": "predicate",
+              "meaning": "{0} is used to index {1}",
+              "argument_roles": [
+                "algorithm",
+                "document"
+              ],
+              "arg_sorts": [
+                "Entity",
+                "Entity"
+              ],
+              "return_sort": "BoolSort()"
+            }
+          },
+          "entities": {
+            "Aster": {
+              "meaning": "the named algorithm Aster",
+              "sort": "Entity"
+            },
+            "Delta": {
+              "meaning": "the document Delta",
+              "sort": "Entity"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "source": {
+      "kind": "synthetic",
+      "synthetic_id": "location_and_roles",
+      "dataset_index": "synthetic:location_and_roles"
+    },
+    "input": {
+      "problem_context": {
+        "premises": [
+          "All buildings allowing pets permit residents to move in with their pets.",
+          "Jun is a resident and Pip is a pet owned by Jun.",
+          "Harbor House is a building that allows pets."
+        ],
+        "question": "Jun is permitted to move into Harbor House with Pip."
+      }
+    },
+    "output": {
+      "premises": [
+        {
+          "fol": "forall b (forall p (forall a (((Building(b) and AllowsPets(b)) and (Resident(p) and (Pet(a) and Owns(p, a)))) -> PermittedMoveIn(p, b, a))))",
+          "declarations": {
+            "symbols": {
+              "Building": {
+                "kind": "predicate",
+                "meaning": "{0} is a building",
+                "argument_roles": [
+                  "building"
+                ],
+                "arg_sorts": [
+                  "Entity"
+                ],
+                "return_sort": "BoolSort()"
+              },
+              "AllowsPets": {
+                "kind": "predicate",
+                "meaning": "{0} allows pets",
+                "argument_roles": [
+                  "building"
+                ],
+                "arg_sorts": [
+                  "Entity"
+                ],
+                "return_sort": "BoolSort()"
+              },
+              "Resident": {
+                "kind": "predicate",
+                "meaning": "{0} is a resident",
+                "argument_roles": [
+                  "person"
+                ],
+                "arg_sorts": [
+                  "Entity"
+                ],
+                "return_sort": "BoolSort()"
+              },
+              "Pet": {
+                "kind": "predicate",
+                "meaning": "{0} is a pet",
+                "argument_roles": [
+                  "pet"
+                ],
+                "arg_sorts": [
+                  "Entity"
+                ],
+                "return_sort": "BoolSort()"
+              },
+              "Owns": {
+                "kind": "predicate",
+                "meaning": "{0} owns {1}",
+                "argument_roles": [
+                  "owner",
+                  "pet"
+                ],
+                "arg_sorts": [
+                  "Entity",
+                  "Entity"
+                ],
+                "return_sort": "BoolSort()"
+              },
+              "PermittedMoveIn": {
+                "kind": "predicate",
+                "meaning": "{0} is permitted to move into {1} with {2}",
+                "argument_roles": [
+                  "person",
+                  "building",
+                  "pet"
+                ],
+                "arg_sorts": [
+                  "Entity",
+                  "Entity",
+                  "Entity"
+                ],
+                "return_sort": "BoolSort()"
+              }
+            },
+            "entities": {}
+          }
+        },
+        {
+          "fol": "(Resident(Jun) and (Pet(Pip) and Owns(Jun, Pip)))",
+          "declarations": {
+            "symbols": {
+              "Resident": {
+                "kind": "predicate",
+                "meaning": "{0} is a resident",
+                "argument_roles": [
+                  "person"
+                ],
+                "arg_sorts": [
+                  "Entity"
+                ],
+                "return_sort": "BoolSort()"
+              },
+              "Pet": {
+                "kind": "predicate",
+                "meaning": "{0} is a pet",
+                "argument_roles": [
+                  "pet"
+                ],
+                "arg_sorts": [
+                  "Entity"
+                ],
+                "return_sort": "BoolSort()"
+              },
+              "Owns": {
+                "kind": "predicate",
+                "meaning": "{0} owns {1}",
+                "argument_roles": [
+                  "owner",
+                  "pet"
+                ],
+                "arg_sorts": [
+                  "Entity",
+                  "Entity"
+                ],
+                "return_sort": "BoolSort()"
+              }
+            },
+            "entities": {
+              "Jun": {
+                "meaning": "Jun",
+                "sort": "Entity"
+              },
+              "Pip": {
+                "meaning": "Pip",
+                "sort": "Entity"
+              }
+            }
+          }
+        },
+        {
+          "fol": "(Building(HarborHouse) and AllowsPets(HarborHouse))",
+          "declarations": {
+            "symbols": {
+              "Building": {
+                "kind": "predicate",
+                "meaning": "{0} is a building",
+                "argument_roles": [
+                  "building"
+                ],
+                "arg_sorts": [
+                  "Entity"
+                ],
+                "return_sort": "BoolSort()"
+              },
+              "AllowsPets": {
+                "kind": "predicate",
+                "meaning": "{0} allows pets",
+                "argument_roles": [
+                  "building"
+                ],
+                "arg_sorts": [
+                  "Entity"
+                ],
+                "return_sort": "BoolSort()"
+              }
+            },
+            "entities": {
+              "HarborHouse": {
+                "meaning": "Harbor House",
+                "sort": "Entity"
+              }
+            }
+          }
+        }
+      ],
+      "conclusion": {
+        "fol": "PermittedMoveIn(Jun, HarborHouse, Pip)",
+        "declarations": {
+          "symbols": {
+            "PermittedMoveIn": {
+              "kind": "predicate",
+              "meaning": "{0} is permitted to move into {1} with {2}",
+              "argument_roles": [
+                "person",
+                "building",
+                "pet"
+              ],
+              "arg_sorts": [
+                "Entity",
+                "Entity",
+                "Entity"
+              ],
+              "return_sort": "BoolSort()"
+            }
+          },
+          "entities": {
+            "Jun": {
+              "meaning": "Jun",
+              "sort": "Entity"
+            },
+            "Pip": {
+              "meaning": "Pip",
+              "sort": "Entity"
+            },
+            "HarborHouse": {
+              "meaning": "Harbor House",
+              "sort": "Entity"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "source": {
+      "kind": "synthetic",
+      "synthetic_id": "classes_can_overlap",
+      "dataset_index": "synthetic:classes_can_overlap"
+    },
+    "input": {
+      "problem_context": {
+        "premises": [
+          "All finches are birds.",
+          "All sparrows are birds.",
+          "Tavi is a finch."
+        ],
+        "question": "Tavi is a sparrow."
+      }
+    },
+    "output": {
+      "premises": [
+        {
+          "fol": "forall x (Finch(x) -> Bird(x))",
+          "declarations": {
+            "symbols": {
+              "Finch": {
+                "kind": "predicate",
+                "meaning": "{0} is a finch",
+                "argument_roles": [
+                  "animal"
+                ],
+                "arg_sorts": [
+                  "Entity"
+                ],
+                "return_sort": "BoolSort()"
+              },
+              "Bird": {
+                "kind": "predicate",
+                "meaning": "{0} is a bird",
+                "argument_roles": [
+                  "animal"
+                ],
+                "arg_sorts": [
+                  "Entity"
+                ],
+                "return_sort": "BoolSort()"
+              }
+            },
+            "entities": {}
+          }
+        },
+        {
+          "fol": "forall x (Sparrow(x) -> Bird(x))",
+          "declarations": {
+            "symbols": {
+              "Bird": {
+                "kind": "predicate",
+                "meaning": "{0} is a bird",
+                "argument_roles": [
+                  "animal"
+                ],
+                "arg_sorts": [
+                  "Entity"
+                ],
+                "return_sort": "BoolSort()"
+              },
+              "Sparrow": {
+                "kind": "predicate",
+                "meaning": "{0} is a sparrow",
+                "argument_roles": [
+                  "animal"
+                ],
+                "arg_sorts": [
+                  "Entity"
+                ],
+                "return_sort": "BoolSort()"
+              }
+            },
+            "entities": {}
+          }
+        },
+        {
+          "fol": "Finch(Tavi)",
+          "declarations": {
+            "symbols": {
+              "Finch": {
+                "kind": "predicate",
+                "meaning": "{0} is a finch",
+                "argument_roles": [
+                  "animal"
+                ],
+                "arg_sorts": [
+                  "Entity"
+                ],
+                "return_sort": "BoolSort()"
+              }
+            },
+            "entities": {
+              "Tavi": {
+                "meaning": "Tavi",
+                "sort": "Entity"
+              }
+            }
+          }
+        }
+      ],
+      "conclusion": {
+        "fol": "Sparrow(Tavi)",
+        "declarations": {
+          "symbols": {
+            "Sparrow": {
+              "kind": "predicate",
+              "meaning": "{0} is a sparrow",
+              "argument_roles": [
+                "animal"
+              ],
+              "arg_sorts": [
+                "Entity"
+              ],
+              "return_sort": "BoolSort()"
+            }
+          },
+          "entities": {
+            "Tavi": {
+              "meaning": "Tavi",
+              "sort": "Entity"
+            }
+          }
+        }
+      }
+    }
+  }
+]

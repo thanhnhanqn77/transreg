@@ -1,0 +1,188 @@
+STRUCTURAL SEMANTICS AND STORY ALIGNMENT
+
+problem_context contains the raw NL premises/question only. Use it to determine
+stable entity identity, discourse domain, event/time arguments and presupposed
+references. It contains no gold answer. Translate only the current sentence:
+other premises are context, never extra conjuncts to copy into this sentence.
+
+1. Logical negation is an AST operator. For ordinary "not P", reuse P and emit
+not P(...), not a new NotP(...) predicate. For "not (A and B)", preserve
+not (A(...) and B(...)); do not lexicalize the whole negative sentence as an
+independent property. An existing compound positive predicate may be negated
+directly if its meaning/scope agrees. Lexical properties such as unaware remain
+subject to the shared policy. Neither the registry nor fluent prose overrides
+negation, coordination, implication or quantifier structure.
+
+2. Decompose source conjunctions and meaningfully compositional descriptions.
+For "a district in a city", prefer District(d) and LocatedIn(d,c), so "d is in
+c" can reuse LocatedIn(d,c). Preserve the narrower type in the premise; never
+equate District with LocatedIn. Distinguish SAME MEANING, ENTAILS and RELATED:
+same meaning can reuse a symbol, semantic entailment needs source-licensed
+decomposition/definition, related metadata alone is not a logical axiom.
+Do not invent bridge facts to force the conclusion or use closed-world rules.
+
+3. "Only" restricts the stated relation and category. "The only music style a
+person plays is S" restricts PlaysStyle(person,s) to s = S. It does not negate
+PlaysInstrument(person,i), even if instruments occur in preceding premises.
+Keep semantic types and ordered argument roles explicit in symbol meanings:
+instrument vs style, person vs office, team vs event, concept vs individual state.
+
+4. Resolve definite/anaphoric arguments using source evidence. "They are
+suspended from office" refers to their office when established by the story;
+an unconstrained exists o can lose that reference. Use a stable office relation
+with an appropriate argument in both premise and question. "The team that won
+the most" in a conditional binds the team satisfying that description in the
+same event; do not replace it with an arbitrary existential winner. Do not
+identify unspecified existential witnesses with named constants by assumption.
+
+5. Choose the discourse domain globally and use it consistently. Preserve
+substantive Student/Monitor/Doctor restrictions in a mixed domain. When the
+source context identifies a named object as a member of that domain, express
+that licensed membership at its introduction, with the relevant source span.
+Alternatively a homogeneous discourse-domain representation must be consistent
+through the whole story. Never infer taxonomy from spelling a constant's name,
+remove guards just to prove a query, or add unsupported type assertions.
+
+6. Keep event/season/time arguments consistent in facts, rules and question.
+For numerical scores, prefer an Int/Real-valued function Score(team,event),
+facts Score(A,E) = 12 and Score(B,E) = 8, and comparisons of that SAME function
+in the ranking rule. If a relational encoding is used, explain its comparison
+meaning explicitly; an uninterpreted HasScore(A,12,E) alone does not imply a
+MorePoints relation. Do not generate a derived target-specific comparison fact
+as if it were a separately stated premise. Do not add orphan InSeason conjuncts
+only to the question when season is already the argument of its relation.
+
+7. Predicates new in the query need source-grounded meaning checks. Preserve
+truly new restrictions and record uncertainty if needed: their absence in the
+premises may legitimately yield Unknown. Distinguish discovery novelty from an
+independent New property according to wording/context, without deleting an
+adjective merely to match an expected answer. Preserve ordinary or vs xor and
+designated-individual/generic/existential choices under the shared policy.
+
+semantic_audit items are fallible warnings, not mandatory rewrites. The verifier
+must identify a concrete source span and conflicting formula clause for any
+rejection. For source contradictions, retain them. Do not solve the query or
+use label expectations. A successful AST check does not establish semantics.
+
+CONNECTED SCHEMA CONTRACT (priority over merely following a naming example):
+The grounded symbol_plan proposes shared meanings, exact ordered argument roles
+and numeric sorts using evidence in the current source. Reuse it from the first
+premise; the empty accepted registry does not license making an incompatible
+local schema. If the plan conflicts with source meaning, explain the concrete
+conflict and choose a faithful representation, not an answer-oriented one.
+
+Preserve positive semantic projection of qualified assertions. For example,
+"Mira was convicted of fraud in 2018" entails convicted-of-fraud(Mira) and has
+a year qualifier. If a rule already uses ConvictedOfFraud(x), preserve that core
+atom in the fact and retain the date in an additional ConvictedOfFraudInYear
+atom, rather than replacing it with an unrelated predicate. An event-based
+decomposition is also valid if used consistently. A negative dated assertion
+does NOT imply timeless negation, and a dated existential query must retain its
+date. The verifier must not propose losing a core meaning merely to add time.
+
+For a score/ranking story in a shared season, use a single Score(team,season)
+real-valued function in facts and arithmetic rules, and a single
+RanksAbove(team1,team2,season) relation in rule and query. A generic ranking rule
+is universally quantified over seasons; a concrete fact/query uses the given
+season constant. Serialize score literals as real decimals (12.0) consistently
+with RealSort(). Avoid existential numeric witnesses whose types change between
+comparisons and facts. Do not add x != y merely as a proof precondition when
+the score comparison already encodes the relevant difference. Facts and query
+must not use fresh temporal variants instead of these same planned relations.
+
+In a categorical puzzle, an introduced indefinite singular subject can denote
+a discourse individual that recurs in the conclusion. For example, "A courier
+is either certified or trained" followed by further properties of that same
+courier is not a fresh existential assertion in each sentence. Choose one
+designated individual when supported by coreference/context. Explicit generic
+or existential wording (all couriers, some courier, another courier, someone
+else) retains its quantifier. Do not strengthen all-individual restrictions or
+identify an unrelated existential witness just to prove the query.
+
+Canonicalizer changes listed in canonicalization are logical equivalences:
+not A -> not B equals B -> A, and a query not A -> B equals A or B.
+Double negation elimination and integer-to-real literal spelling with identical
+value in a Real-valued slot are also meaning preserving. The semantic verifier
+must compare meaning, not reject these because the surface operator/direction
+differs. No new fact or inference result is being asserted by these rewrites.
+
+Keep complete adjectival conjunctions: "good athletes" includes Athlete(x)
+and GoodAtSports(x), rather than only GoodAtSports(x). Use short canonical
+predicate names with a precise glossary. Do not output proof steps, derived
+facts, predicted labels or target-specific shortcuts in a translation.
+
+JOINT PROPOSAL AND DOMAIN CONTRACT:
+The initial proposal was made across all source sentences. During local review
+and repair, preserve its shared relation identities and resolved argument roles;
+do not invent a fresh time/place variant solely to enrich the current wording.
+A source-licensed positive core + dated qualification is allowed and necessary
+when a generic rule uses that core. Suggested corrections MUST retain the core,
+not replace it. A office-specific query requires compatible office roles in the
+initial rule/facts; an arbitrary existential office does not resolve "their".
+
+When domain_plan.mode is homogeneous and its grounded source evidence defines
+the quantification universe, the class is implicit in that universe. Adding a
+fresh uninterpreted class guard only in a rule changes the encoded problem.
+For example, a homogeneous monitor puzzle translates "all monitors in a library"
+as forall x (InLibrary(x) -> ProducedByAOC(x)); no Monitor guard or named Monitor
+fact is required. Do not reject this as a missing noun. The earlier instruction
+to preserve substantive class guards applies to mixed-domain quantification.
+Do not infer domain homogeneity from a requested answer.
+
+The canonicalizer can perform capture-avoiding alpha renaming of bound variables
+(p1/h2 etc. to unused single lowercase letters). This changes no quantifier
+scope or argument roles. In a source-grounded homogeneous subject domain it
+can elide a redundant domain guard from a quantified conjunction; this is the
+explicit discourse-carrier convention, not a claim that a class predicate is
+universally true in every arbitrary mixed-domain model. Do not reintroduce a
+fresh uninterpreted guard under that same domain_plan. Explicit mixed classes
+and negative class membership disable the homogeneous subject heuristic.
+
+V5 SOURCE-GROUNDED CROSS-SENTENCE ALIGNMENT (priority for all stages):
+1. Inspect alignment_plan.generic_rules before choosing a quantifier. In a
+categorical rule collection, "A person P or Q" and "Either an animal is P or Q"
+describe generic class members (forall), not the existence of a fresh person or
+animal. Preserve explicit "some", "there exists", "at least one", episodic
+introductions and designated-individual anaphora. A generic "An N is P" question
+that restates a class rule is forall x (N(x) -> P(x)), not exists x (N(x) and P(x)).
+Carrier Animal/Person guards are implicit only under the source-grounded
+domain_plan; restrictions such as Reptile or Doctor remain substantive.
+2. Active/passive/inverse surface wording does not create a second relation.
+"S uses standard G" and "G is used by S" use the SAME symbol with the SAME
+ordered arguments, such as Uses(S,G), in both premises and question. Do not add
+an equivalence axiom between two newly invented symbols; choose one symbol.
+The exact schema is source-grounded and applies to all analogous relations.
+3. Before introducing a query-only adjective or noun predicate, determine
+whether it is a genuinely additional property or part of an already expressed
+relation/event. "discovered a new genus" can describe the discovery event,
+not an unrelated material-age New(genus) property. If genuinely independent
+novelty is stated (e.g. "brand-new object manufactured yesterday"), retain it.
+Never delete a restriction just because its presence makes reasoning Unknown.
+4. Represent explicit types in premises as well as queries when the source
+actually names them. Preserve type words in names/appositions, e.g. "Fort X"
+explicitly describes a fort. Do not introduce Fort only in a query while leaving
+the same source-described object untyped. Do not equate a government agency
+with Company without source evidence; use the appropriate organization meaning
+or preserve a genuine distinction. Missing source information remains missing.
+5. Decompose nested location/event phrases using compatible source relations:
+an event at a place inside a country can be queried via that place and its
+country-membership relation. Keep month/year qualifiers. Avoid an opaque
+EventInPlace(e,Country) query disconnected from EventInPlace(e,City) and
+LocatedIn(City,Country). This is compositional interpretation of the supplied
+location, not a license to invent transitivity or outside geographic knowledge.
+6. Local semantic repairs must be checked against the WHOLE source schema.
+Adding a query restriction has no license to assert the missing premise fact.
+If an undergraduate field is not explicitly a major, record the ambiguity and
+retain the distinction; neither labels nor desired determinate answers resolve it.
+Before returning FOL, inspect every repeated relation, inverse phrasing, subject
+quantifier and source-described type across premises and the query. Do not solve
+the query during this alignment check.
+
+SOURCE-POLICY NORMALIZATIONS: source_policy_generic_subject_as_universal means
+the implementation corrected an exists at the root of an explicitly identified
+generic source rule to forall. This is a source-interpretation policy, NOT a
+logical equivalence of arbitrary exists/forall formulas. Review the actual
+generic source under that policy. Never apply it to genuine existential or
+episodic statements. homogeneous_subject_domain_guard_elision includes a sole
+carrier antecedent in forall x (Carrier(x) -> P(x)), not only conjunctions.
+Subclass guards and unquantified named membership are not removed.

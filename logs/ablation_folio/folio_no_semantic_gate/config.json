@@ -1,0 +1,21 @@
+{
+  "model_name": "gemma4:31b-cloud",
+  "host": "https://ollama.com/api/chat",
+  "auth": "environment_variable",
+  "max_tokens": 12288,
+  "timeout": 600,
+  "mode": "hybrid",
+  "ablation": "no_semantic_gate",
+  "ablation_details": {
+    "name": "no_semantic_gate",
+    "description": "w/o Gate 1: Skips 3-way semantic audit and semantic repair (Evaluates impact of semantic verifier)",
+    "enable_global_analysis": true,
+    "enable_joint_proposal": true,
+    "enable_blind_backtranslation": true,
+    "enable_semantic_verification": false,
+    "enable_semantic_repair": false,
+    "enable_ast_validation": true,
+    "enable_ast_repair": true,
+    "enable_registry": true
+  }
+}

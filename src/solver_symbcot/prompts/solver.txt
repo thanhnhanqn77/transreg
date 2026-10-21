@@ -1,0 +1,88 @@
+Based on the premises, plan, and question, can you execute each step by selecting relevant premises and making inferences based on first-order-logic inference rules to solve the question?
+-----
+The first-order-logic inference rules include but are not limited to: Modus Ponens, Modus Tollens, Generalization, Specialization, Conjunction, Elimination, Transitivity, and Contradiction Rule.
+-----
+The definition of the three options are:
+True: A statement is "true" if it necessarily follows from the given premises using logical rules.
+False: A statement is "false" if it is contradicted by the premises or its negation is logically inferred from them.
+Uncertain: A statement is "uncertain" if there is insufficient information in the premises to determine its truth value conclusively under the Open-World Assumption (OWA).
+-----
+Please solve the question step by step following the plan. During each step, please indicate what first-order logic inference rules you used.
+Please also highlight the final answer at the very end in curly brackets as "Final answer: {true}", "Final answer: {false}", or "Final answer: {uncertain}".
+-----
+Below is an example:
+Plan:
+1. Identify the Goal: Determine the truth value of "Rough(dog, True)".
+2. Review Given Facts: Needs(dog, bear, True).
+3. Search Rules: Needs($x, bear, True) >>> Eats($x, baldEagle, True), and Eats($x, baldEagle, True) >>> Rough($x, True).
+4. Apply Modus Ponens to deduce intermediate and final conclusions.
+5. Conclude whether True, False, or Uncertain.
+
+Context:
+Predicates:
+Rough($x, bool) ::: Is x rough?
+Needs($x, $y, bool) ::: Does x need y?
+Chases($x, $y, bool) ::: Does x chase y?
+Blue($x, bool) ::: Is x blue?
+Nice($x, bool) ::: Is x nice?
+Eats($x, $y, bool) ::: Does x eat y?
+Cold($x, bool) ::: Is x cold?
+
+Facts:
+Rough(baldEagle, False) ::: The bald eagle is not rough.
+Needs(bear, baldEagle, False) ::: The bear does not need the bald eagle.
+Needs(dog, bear, True) ::: The dog needs the bear.
+
+Rules:
+Rough($x, True) >>> Chases($x, baldEagle, True) ::: If someone is rough then they chase the bald eagle.
+Needs($x, bear, True) >>> Blue($x, False) ::: If someone needs the bear then they are not blue.
+Nice(bear, True) >>> Chases(bear, baldEagle, True) ::: If the bear is nice then the bear chases the bald eagle.
+Eats($x, baldEagle, True) >>> Rough($x, True) ::: If someone eats the bald eagle then they are rough.
+Cold($x, True) && Chases($x, bear, True) >>> Rough(bear, True) ::: If someone is cold and they chase the bear then the bear is rough.
+Needs($x, bear, True) >>> Eats($x, baldEagle, True) ::: If someone needs the bear then they eat the bald eagle.
+
+Query:
+Rough(dog, True) ::: The dog is rough.
+
+Execution:
+**Step 1: Identify the Goal**
+- Goal: Determine the truth value of Rough(dog, True).
+- Inference rule: N/A.
+
+**Step 2: Retrieve Relevant Given Facts**
+- Relevant Fact: Needs(dog, bear, True) (The dog needs the bear).
+- Inference rule: Fact retrieval.
+
+**Step 3: Apply Rule for Eating the Bald Eagle**
+- Relevant Rule: Needs($x, bear, True) >>> Eats($x, baldEagle, True).
+- Premise: Needs(dog, bear, True) with substitution $x = dog.
+- Inference: Eats(dog, baldEagle, True) (The dog eats the bald eagle).
+- Inference rule: Modus Ponens.
+
+**Step 4: Apply Rule for Being Rough**
+- Relevant Rule: Eats($x, baldEagle, True) >>> Rough($x, True).
+- Premise: Eats(dog, baldEagle, True) with substitution $x = dog.
+- Inference: Rough(dog, True) (The dog is rough).
+- Inference rule: Modus Ponens.
+
+**Step 5: Verify Consistency and Conclude**
+- We have derived Rough(dog, True), which matches the candidate query.
+- No contradicting facts exist in the premises.
+- Conclusion: The statement is true.
+
+Final answer: {true}
+-----
+Below are the premises and questions you need to solve:
+-----
+Plan:
+[[PLAN]]
+
+Context:
+[[CONTEXT]]
+-----
+
+Execution requirements:
+1. Carefully execute step by step following the plan. Clearly indicate whether the question is true, false, or uncertain using curly brackets {true}, {false}, or {uncertain} at the very end.
+2. Pay attention to the order of variables in relations: Needs(dog, bear) does NOT mean Needs(bear, dog).
+3. Under the Open-World Assumption (OWA), if neither the statement nor its negation can be proven, the answer is {uncertain}. Do NOT assume unmentioned facts are false.
+4. Conclude with: Final answer: {true/false/uncertain}

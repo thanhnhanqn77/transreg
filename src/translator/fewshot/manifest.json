@@ -1,0 +1,30 @@
+{
+  "version": 4,
+  "dataset": "data/folio_train_fewshots.jsonl",
+  "source_indices": [
+    0,
+    5,
+    8,
+    10,
+    20
+  ],
+  "source_count": 5,
+  "examples_per_stage": {
+    "global_analysis": 7,
+    "translate": 9,
+    "backtranslate": 9,
+    "verify": 11,
+    "extract": 3,
+    "translate_joint": 5
+  },
+  "source_nl_sha256": "cd9c82c9d9960757a99fcc03cdbc0140f6d0a671e0a62d778bc333ba7f46c044",
+  "synthetic_ids": [
+    "generic_vs_existential",
+    "designated_adviser",
+    "class_not_constant",
+    "location_and_roles",
+    "classes_can_overlap"
+  ],
+  "construction": "Train-source demonstrations plus independently authored synthetic contrasts; no evaluation labels or reference formulas.",
+  "policy": "FOLIO either-or XOR; source-context generic/existential/designated scope; global schema guidance; exact shared roles; keep current inference budgets."
+}

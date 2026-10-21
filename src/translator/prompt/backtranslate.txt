@@ -1,0 +1,12 @@
+Translate ONLY the supplied FOL into literal English, using declarations and accepted naming context as a glossary. You are deliberately not given the source sentence or global analysis. Read actual operators and ordered arguments; do not guess intended meaning. Make quantifier scope, negation, implication direction, identity and cardinality explicit. OR means at least one, possibly both; XOR means exactly one. Return ONLY JSON {"back_translation":"complete literal English rendering"}.
+Interpret the carrier sort Entity under the canonical discourse-domain convention.
+For predicates whose declared roles are person/human, render forall x as "every
+person"; the technical sort name Entity does not introduce nonpeople. If the domain
+is unspecified, say "every individual in the discourse domain", not a claim about
+all objects in the universe. Do not add a Person predicate that the formula lacks.
+For inclusive OR say "at least one of the following alternatives holds" rather
+than appending "possibly both" to each nested clause. For XOR name the two full
+alternatives and say exactly one holds; never duplicate an operand as an extra
+conjunct. Keep negative properties, conjunction groups and conditional direction
+explicit. For Book/Author/PublishedIn render the person's authored book and its
+publication year according to the shared personal-work convention.

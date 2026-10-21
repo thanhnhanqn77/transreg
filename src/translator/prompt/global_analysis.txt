@@ -1,0 +1,134 @@
+Analyze relations across ALL premises and the question before any translation.
+
+Return ONLY JSON:
+
+{
+  "global_analysis": {
+    "shared_meanings": [],
+    "related_chunks": [],
+    "entities": [],
+    "predicate_alignments": [],
+    "shared_events": [],
+    "argument_roles": {},
+    "coreference": [],
+    "scope_constraints": [],
+    "context": [],
+    "must_remain_distinct": [],
+    "uncertainties": [],
+    "symbol_plan": [],
+    "domain_plan": {},
+    "discourse_referents": [],
+    "quantifier_plan": []
+  }
+}
+
+Do not generate FOL, declarations, a registry, or an answer.
+
+This analysis is fallible guidance, never verified truth.
+Include quantifier_plan entries with sentence label, exact source evidence,
+generic/existential/designated interpretation and explanation. Honor the
+source-only alignment_plan generic convention while preserving real anaphora.
+In predicate_alignments explicitly identify inverse active/passive phrasings
+and their ordered argument roles. Record type words in appositions/names and
+qualifiers that are part of an existing event rather than independent properties.
+Also record genuinely query-only restrictions that have no premise support;
+do not turn them into premise facts. All these decisions must cite source spans.
+Do not import facts or resolve uncertainty just to make a proof work.
+
+Identify semantic correspondences across premises and the question.
+
+In particular:
+
+- Detect different surface expressions that denote the same predicate or semantic relation.
+- Align paraphrases when they express the same meaning with compatible argument roles.
+  Examples:
+    "AMC List" / "AMC service"
+    "prefer TV series more" / "prefer TV series to movies"
+- Prefer one canonical meaning for equivalent expressions instead of creating separate meanings only because wording differs.
+- Do NOT merge expressions merely because they are related. If meanings differ, record them in must_remain_distinct.
+- Record textual evidence for every important alignment.
+
+Also identify logical scope and restriction patterns that later translation must preserve.
+
+For relative-clause constructions such as:
+
+    "people/customers who P ... Q"
+
+treat P as a restriction/condition on the subject set and Q as the main consequence.
+Record this relation in scope_constraints.
+
+For example:
+
+    "Customers who prefer TV series will not watch TV series in cinemas"
+
+should be analyzed as:
+
+    restriction: prefer TV series
+    consequence: not watch TV series in cinemas
+    relation: conditional
+
+Do NOT interpret the restriction and consequence as two properties asserted universally of every entity.
+
+For:
+    "not a person P and a Q"
+
+first group the coordinated phrase as (P and Q), then negate the entire group:
+    not (P and Q)
+
+Do not interpret it as:
+    (not P) and Q
+
+Apply the same scope discipline inside implication antecedents.
+
+Under the shared FOLIO representation policy:
+
+- Generic human-domain expressions such as "people", "persons", and similar domain nouns should not automatically become independent type predicates or guards when they merely describe the discourse domain.
+- Likewise, domain nouns such as "customers" may function as discourse-domain wording when the problem consistently reasons about customers.
+- Do not infer an explicit category fact such as Customer(James) unless it is stated.
+- Instead, record the domain interpretation in context so the translator follows one consistent representation policy.
+
+Identify recurring individuals and coreference across sentences.
+
+Identify equivalent personal-work wording such as published/authored/wrote when the shared FOLIO convention supports a common compositional interpretation, while keeping publishers/companies and authors distinct.
+
+Keep semantically different relations distinct even when they are closely related.
+
+The question is a query, not an additional premise.
+
+The global analysis and accepted registry cannot override these scope and semantic-alignment rules.
+
+CONNECTED TRANSLATION OUTPUT EXTENSION (required):
+Also include global_analysis.symbol_plan: a list of canonical typed relation
+schemas needed across ALL premises and question. Each entry is:
+{"name":"CanonicalRelation", "kind":"predicate", "meaning":"source meaning",
+ "argument_roles":["role1","role2"], "arg_sorts":["Entity","Entity"],
+ "return_sort":"BoolSort()", "evidence":["verbatim span from a source sentence"]}.
+For numerical score functions use kind=function and return_sort=RealSort().
+This is a relation schema, not an asserted FOL formula or declaration registry.
+Every evidence span must literally occur in the supplied premises/question.
+
+Allocate shared event/time slots BEFORE translating premise 1. If rules, facts
+and query concern a common named season, every relevant score/ranking relation
+must use the same season slot. Do not plan an unqualified ranking for rules and
+a different qualified ranking for the question. If a generic rule deliberately
+ignores time, plan a core relation plus separate temporal qualification which
+retains its positive core meaning. Keep dates without replacing that core.
+
+Also include discourse_referents: [{"description":"recurring noun phrase",
+"representation":"designated_individual|quantified_class|existential",
+"evidence":["verbatim source span"],"reason":"source-grounded reading"}].
+A singular indefinite subject introduced in a categorical puzzle and repeatedly
+described in its question can be a designated discourse individual. Distinguish
+it from explicit some/all and from a newly quantified individual. Stable
+coreference does not assert membership merely from a constant's spelling.
+
+Also include domain_plan: {"mode":"homogeneous|mixed", "category":"...",
+"evidence":["verbatim source span"], "reason":"discourse interpretation"}.
+If a categorical puzzle is entirely about monitors and their properties, its
+quantified individual domain is monitors; record homogeneous. This avoids adding
+an uninterpreted class guard in only one rule. Mixed stories retain substantive
+class restrictions. A manufacturer mentioned as an argument does not by itself
+change which individuals the subject-domain quantifiers range over.
+Use supported computational sorts Entity/IntSort()/RealSort()/StringSort() in
+symbol_plan. A semantic Season/Office category belongs in argument roles;
+Entity is the computational carrier, not an assertion of category membership.
